@@ -1,0 +1,160 @@
+<meta charset="utf-8"/>
+<link rel="stylesheet" href="css/style.css">
+<body>
+<aside class="sidebar">
+	<div class="sidebar-content">
+		<div class="logo-container">
+			<a href="#" class="logo"><img src="./img/jindoToJqueryLogo.png"></a>
+	    </div>
+		<div class="accordian">
+			<div class="accordian-item">
+				<div class="menu-item accordian-header">
+					<div class="icon info"></div>
+					마이그레이션 안내
+				</div>
+				<div class="accordian-content">
+					<div class="menu-item">
+						라이브러리 사용법 
+					</div>
+					<div class="accordian-item">
+						<div class="menu-item accordian-header">
+							jQuery 10분 요리
+							<div class="icon">
+								<svg viewBox="0 0 24 24" height="100%" width="100%" preserveAspectRatio="xMidYMid meet" fit="" style="pointer-events: none; display: block;"><g><path d="M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z"></path></g></svg>							
+							</div>
+						</div>
+						<div class="accordian-content">
+							<div class="menu-item">
+								선택하기
+							</div>
+							<div class="menu-item">
+								변경하기
+							</div>
+							<div class="menu-item">
+								붙이고 떼기
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="accordian-item">
+				<div class="menu-item accordian-header">
+					<div class="icon wrapper"></div>
+					Wrapper Classes
+				</div>
+				<div class="accordian-content classes-container">
+				</div>
+			</div>
+    	</div>
+	</div>
+</aside>
+<article>
+</article>
+<script type="text/template" id="class-template">
+<div class="accordian-item">
+	<div class="menu-item accordian-header">
+		<%= className %>
+		<div class="icon">
+			<svg viewBox="0 0 24 24" height="100%" width="100%" preserveAspectRatio="xMidYMid meet" fit="" style="pointer-events: none; display: block;"><g><path d="M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z"></path></g></svg>							
+		</div>
+	</div>
+	<div class="accordian-content">
+		<%= methods %>
+	</div>
+</div>	
+</script>
+<script type="text/template" id="method-template">
+<div class="menu-item" data-class-index="<%= classIndex %>" data-method-index="<%= methodIndex %>">
+<%= methodName %>
+</div>
+</script>
+<script type="text/template" id="article-template">
+	<section class="header">
+		<div>
+		<h1><%= methodName %></h1>
+		<p><%= description %></p>
+		</div>
+	</section>
+	<section class="content">
+		<div class="col">
+			<h2>Jindo</h2>
+			<div class="jsbin-container">
+				<a class="jsbin-embed" href="<%= jindoJsbin %>">JS Bin</a>
+				<!--script src="http://static.jsbin.com/js/embed.js"></script-->
+			</div>
+		</div>
+		<div class="col">
+			<h2>jQuery</h2>
+			<div class="jsbin-container">
+				<a class="jsbin-embed" href="<%= jqueryJsbin %>">JS Bin</a>
+				<!--script src="http://static.jsbin.com/js/embed.js"></script-->
+			</div>
+		</div>
+	</section>
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.2/underscore-min.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="./js/$.Accordian.js"></script>
+<script>
+var data = [
+	{
+		className: "$A",
+		methods: [
+			{
+				name: "$value",
+				description: "$value() 메서드는 내부 배열을 반환한다.",
+				JindoCodeUrl : 'http://jsbin.com/iwovaj/74/embed?js&height=450px',
+				JQueryCodeUrl: 'http://jsbin.com/iwovaj/74/embed?js&height=450px'
+			},
+			{
+				name: "Break",
+				description: "Break() 메서드는 forEach(), filter(), map() 메서드의 루프를 중단한다. 내부적으로는 강제로 예외를 발생시키는 구조이므로, try - catch 영역에서 이 메서드를 실행하면 정상적으로 동작하지 않을 수 있다.",
+				JindoCodeUrl : 'http://jsbin.com/iwovaj/74/embed?js&height=450px',
+				JQueryCodeUrl: 'http://jsbin.com/iwovaj/74/embed?js&height=450px'
+			}
+		]
+	},
+	{
+		className: "$Element",
+		methods: [
+			{
+				name: "addClass",
+				description: "addClass() 메서드는 HTML 요소에 클래스를 추가한다.",
+				JindoCodeUrl : 'http://jsbin.com/iwovaj/74/embed?js&height=450px',
+				JQueryCodeUrl: 'http://jsbin.com/iwovaj/74/embed?js&height=450px'
+			},
+			{
+				name: "after",
+				description: "after() 메서드는 jindo.$Element() 객체에 있는 요소의 다음 형제 노드(nextSibling)로 파라미터로 지정한 요소를 배정한다.",
+				JindoCodeUrl : 'http://jsbin.com/iwovaj/74/embed?js&height=450px',
+				JQueryCodeUrl: 'http://jsbin.com/iwovaj/74/embed?js&height=450px'
+			}
+		]
+	}
+];
+
+$(".accordian").accordian({
+	data: data
+}).on('showArticle', function(e, data){
+	updateArticle({
+		methodName: data.className+"."+data.name+"()",
+		description: data.description,
+		jindoJsbin: data.JindoCodeUrl.split('?')[0]+'?js&height=450px',
+		jqueryJsbin: data.JQueryCodeUrl.split('?')[0]+'?js&height=450px'
+	});
+});;
+
+function updateArticle(obj) {
+	$('article').html('');
+	var articleHtml = '';
+    var articleTpl = _.template($("#article-template").text()),
+	articleHtml = articleTpl(obj);
+	var $article = $(articleHtml);
+		
+	window.jsbinified = undefined;
+	$('.jsbin-container' , $article).append($('<script src=\"http://static.jsbin.com/js/embed.js\">'));
+
+	$('article').html($article);
+}
+</script>
+</body>

@@ -1,0 +1,199 @@
+	html,
+	body,
+	p {
+		padding: 0;
+		margin: 0;
+		background: #f5f5f5;
+		1font-family: "RobotoDraft",Helvetica,Arial,sans-serif;
+
+	}
+	
+	.sidebar,
+	.sidebar-content {
+		height: 100%;
+		width: 265px;
+		background-color: #414141;
+		position: fixed;
+	}
+	
+	.logo-container {
+		text-align: center;
+		height: 80px;
+		padding-top: 18px;
+	}
+	
+	.menu-item {	
+		position: relative;
+		vertical-align: middle;
+		height: 48px;
+		font-size: 14px;
+		line-height: 48px;
+		padding: 0;
+		
+		font-weight: 500;
+		font-family: "RobotoDraft",Helvetica,Arial,sans-serif;
+		color: #f0f0f0;
+	}
+
+	/* svg 아이콘을 위한 설정 */
+	.menu-item > .icon {
+		display: inline-block;
+		vertical-align: middle;
+		position: absolute;
+		right: 0px;
+		margin-top: 12px;
+		height: 24px;
+		width: 24px;				
+		color: #aaa;
+		fill: currentColor;
+	}
+	
+	.accordian-content {
+		display: none;
+	}
+	
+	/* base Element */ 
+	.accordian {	
+		position: absolute;
+		top: 80px;
+		right: 0;
+		bottom: 0;
+		left: 0;
+
+		overflow: auto;		 
+	}
+	
+	.accordian > .accordian-item {
+		padding: 0 24px;
+		border-top: 1px solid #757575;				
+	}
+
+	/* 최상위 아코디언 .accordian > .accordian-item === .mainmenu */
+	.accordian > .accordian-item > .menu-item
+	{
+		font-weight: 600;
+		font-size: 14px;
+		padding: 0 24px;
+		padding-left: 36px;		
+	}
+	
+	.accordian > .accordian-item > .menu-item.selected
+	{
+		color: #02ea37;
+	}
+			
+
+	.accordian > .accordian-item:last-of-type {
+		border-bottom: 1px solid #757575;				
+	}
+		
+	.accordian > .accordian-item > .menu-item > .icon
+	{
+		position: absolute;
+		left: 0;	
+		height: 48px;
+
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center center;		
+		margin-top: 0;
+	}
+
+	.accordian > .accordian-item > .menu-item > .icon.info {
+		background-image: url(../img/info.png);
+	}
+
+	.accordian > .accordian-item > .menu-item > .icon.wrapper {
+		background-image: url(../img/wrapper.png);
+	}	
+	
+	/* 두번째 레벨 아코디언 */
+ 	.accordian > .accordian-item > .accordian-content > .accordian-item > .accordian-content > .menu-item  
+	{
+		padding-left: 36px;		
+	}
+	
+	
+	article {	
+		padding-left: 265px;
+		padding-right: 15px;
+
+		padding-bottom: 45px;
+
+		background: #f5f5f5;
+		overflow: hidden;
+		
+	}
+	article > section {
+		width: 100%;
+		1padding-left: 36px;
+	}	
+	article > section.header {
+		height: 40px;
+		margin: 15px auto;
+	}
+	
+	article > section.header h1 {
+		font-size: 40px;
+		font-weight: 300;
+		letter-spacing: -0.01em;
+		line-height: 48px;
+		margin: 0;
+		width: 40%;
+		float:left;
+		
+		1background-color: aqua;
+	}
+	
+	article > section.header > div {
+		position: relative;
+		1width: 100%;
+		1background-color: yellow;
+		height: 50px;
+		margin-left: 15px;
+		1margin-right: 15px;
+		max-width: 900px;
+
+
+	}
+	article > section.header p {
+		font-size: 16px;
+		font-family: "RobotoDraft",Helvetica,Arial,sans-serif;
+		font-weight: 300;
+		line-height: 24px;
+		float:left;
+		color: #777;
+		width: 60%;
+		1background-color:fuchsia;
+		background-color: transparent;
+		1margin-right: 15px;
+		margin: 5px auto;
+		margin-bottom: 15px;
+		text-align: right;
+		box-sizing: content-box;
+	}
+		
+	article > section.content {
+		text-align: center;
+		max-width: 912px;
+	}
+	article > section.content > .col {
+		width: 50%;
+		float: left;
+	}	
+	
+	article > section.content > h2 {
+		margin: 0;
+	}
+	article > section.content > h2> span {
+		font-size: 18px;
+	}
+	.jsbin-container {
+		padding-left: 15px;
+		box-sizing: border-box;
+		
+	}
+	
+	.accordian-content > .menu-item.selected {
+		font-weight: 700;
+	}
