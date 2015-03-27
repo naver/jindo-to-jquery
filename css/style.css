@@ -33,6 +33,7 @@
 		font-weight: 500;
 		font-family: "RobotoDraft",Helvetica,Arial,sans-serif;
 		color: #f0f0f0;
+		cursor:pointer;
 	}
 
 	/* svg 아이콘을 위한 설정 */
@@ -46,6 +47,10 @@
 		width: 24px;				
 		color: #aaa;
 		fill: currentColor;
+	}
+
+	.menu-item:hover {
+		color : ;
 	}
 	
 	.accordian-content {
@@ -63,9 +68,13 @@
 		overflow: auto;		 
 	}
 	
+	.accordian-content .accordian-header.selected {
+		background:#3b7bfb
+	}
+
 	.accordian > .accordian-item {
 		padding: 0 24px;
-		border-top: 1px solid #757575;				
+		border-top: 1px solid #757575;
 	}
 
 	/* 최상위 아코디언 .accordian > .accordian-item === .mainmenu */
@@ -74,9 +83,9 @@
 		font-weight: 600;
 		font-size: 14px;
 		padding: 0 24px;
-		padding-left: 36px;		
+		padding-left: 36px;
 	}
-	
+
 	.accordian > .accordian-item > .menu-item.selected
 	{
 		color: #02ea37;
@@ -175,7 +184,8 @@
 		
 	article > section.content {
 		text-align: center;
-		max-width: 912px;
+		height : 450px; /* 임시값 */
+		/*max-width: 912px;*/
 	}
 	article > section.content > .col {
 		width: 50%;
@@ -196,4 +206,8 @@
 	
 	.accordian-content > .menu-item.selected {
 		font-weight: 700;
+	}
+
+	article > .comments {
+
 	}

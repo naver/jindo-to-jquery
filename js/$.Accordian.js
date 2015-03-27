@@ -59,7 +59,7 @@
     Accordian.prototype.buildOut = function() {
 		//_.data 를 이용해서 wrapper class 영역의 html 을 채워준다.
 		var _ = this;
-		console.log(_.data);
+		//console.log(_.data);
 		var classesHtml = $.map( _.data, function( classObj, classIndex ) {
 			var methodsHtml = $.map( classObj.methods, function( method, methodIndex) {
 				var methodHtml = _.methodTemplate({
@@ -103,7 +103,6 @@
 			if($accordianHeader.hasClass('selected')) {
 				$accordianHeader.removeClass('selected')
 				$accordianContent.slideUp({});
-				_.$accordianHeaders.filter(".selected").removeClass('selected').next().slideUp({});
 			} else {
 				_.$accordianHeaders.filter(".selected").removeClass('selected').next().slideUp({});
 				$accordianHeader.addClass('selected')
@@ -127,15 +126,33 @@
 		_.$menuItems.on('click.accordian', function(e){
 			$('.accordian-content > .menu-item').removeClass("selected");
 
-			if($(e.target).data().classIndex !== undefined) {
+			var data = $(e.target).data();
+			var articleData = null;
+
+			if(data.classIndex !== undefined) {
 				$(e.target).addClass("selected");
 				
-				var classIndex = $(e.target).data().classIndex;
-				var methodIndex = $(e.target).data().methodIndex;
-				var classObj = this.data[$(e.target).data().classIndex];
+				var classIndex = data.classIndex;
+				var methodIndex = data.methodIndex;
+				var classObj = this.data[data.classIndex];
 				var contentData = classObj.methods[methodIndex];
 				contentData.className = classObj.className;
-				$(this.$accordian).trigger("showArticle", [contentData]);
+				//$(this.$accordian).trigger("showArticle", [contentData]);
+				
+				articleData = {
+					type : 'api',
+					data : contentData
+				}
+			} else if (data.guideUrl) {
+				articleData = {
+					type : 'guide',
+					data : data.guideUrl
+				}
+			}
+
+			//If the selected items has a valid data, then request to update an article.
+			if (articleData) {
+				$(this.$accordian).trigger("showArticle", articleData);
 			}
 		}.bind(this));
     };
