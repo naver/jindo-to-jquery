@@ -24,9 +24,7 @@ var ArticleView = (function() {
 		articleHtml = articleTpl(templateData);
 		var $article = $(articleHtml);
 			
-		window.jsbinified = undefined;//???무슨 용도 ?
-		//뒤에서 따로 append 해주는 이유는?
-		//$('.jsbin-container' , $article).append($('<script src=\"http://static.jsbin.com/js/embed.js\">'));
+		window.jsbinified = undefined;
 		$('article').html($article);
 		Comments.show();
 	}
