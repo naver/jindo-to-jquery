@@ -1,7 +1,9 @@
 var Comments = (function() {
 	return {
 		show : function() {
-			$('#code_comments').html('<img src="./img/comments.png">');
+			var disqusTpl = _.template($("#disqus-template").text());
+			var disqusHtml = disqusTpl();
+			$('#code_comments').html(disqusHtml);
 		},
 		hide : function() {
 			$('#code_comments').html('');
