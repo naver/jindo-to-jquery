@@ -65,13 +65,13 @@
 				var methodHtml = _.methodTemplate({
 					methodName: method.name,
 					classIndex: classIndex,
-					methodIndex: methodIndex,
+					methodIndex: methodIndex
 				});
 				return methodHtml;
 			}).join('');
 			var classHtml = _.classTemplate({
 				className: classObj.className,
-				methods: methodsHtml
+				methods: methodsHtml,
 			});
 			return classHtml;
 		}).join('');
@@ -141,12 +141,14 @@
 				
 				articleData = {
 					type : 'api',
-					data : contentData
+					data : contentData,
+					title : contentData.className + ' - ' + contentData.name
 				}
 			} else if (data.guideUrl) {
 				articleData = {
 					type : 'guide',
-					data : data.guideUrl
+					data : data.guideUrl,
+					title : $(e.target).text()
 				}
 			}
 
