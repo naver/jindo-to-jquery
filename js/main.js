@@ -47,15 +47,21 @@
 
 	function urlToArticleParam(sUrl) {
 		var htRetParam = {};
-		var sType = sUrl.match(/type=([^&]*)&?/)[1];
-		var sParam = sUrl.match(/param=([^&]*)&?/)[1];
-		
-		if (!sType || !sParam) {
-			return null;
+		var sType = "guide";//기본값
+		var sParam = "html/guide.usage.html";//가본값
+
+		//파라미터 파싱
+		var aMatched = sUrl.match(/type=([^&]*)&?/);
+		if (aMatched) {
+			sType = aMatched[1];
 		}
-
+		aMatched = sUrl.match(/param=([^&]*)&?/);
+		if (aMatched) {
+			sParam = aMatched[1];
+		}		
+		
+		//반환 값 설정
 		htRetParam.type = sType;
-
 		if (sType === 'api') {
 			var aApi = sParam.split('_');
 			htRetParam.data = getMethodInfo(aApi[0], aApi[1]);
