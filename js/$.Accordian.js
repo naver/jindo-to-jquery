@@ -17,6 +17,7 @@
 }(function($, underscore) {
     'use strict';
     var Accordian = window.Accordian || {};
+    var LOCALSTRG_MENU_SCROLL_TOP = 'menuScrollTop';
 
     Accordian = (function() {
 
@@ -34,11 +35,22 @@
             };
 
             $.extend(_, _.initials);
-			_.data = settings.data; // Wrapper Class 의 정보를 담은 객체
+            _.settings = settings;
+			_.apiData = settings.apiData; // Wrapper Class 의 정보를 담은 객체
+			_.guideData = settings.guideData;
+
+			_.$sideMenu = $('#side_menu');
  			_.$classesContainer = $(".classes-container", _.$accordian);
 
  			//Build HTML
             _.buildOut();
+
+            //menu 스크롤
+            var nMenuScrollTop = localStorage.getItem(LOCALSTRG_MENU_SCROLL_TOP);
+            if (!nMenuScrollTop) {
+            	nMenuScrollTop = 0;
+            }
+            _.$sideMenu.scrollTop(nMenuScrollTop);
 
             //Element
 			_.$accordianHeaders = $(".accordian-header", _.$accordian);
@@ -57,27 +69,75 @@
         return Accordian;
 
     }());
+	
+	Accordian.prototype.buildContent = function(aMenuItems) {
+		var contentHtml = '';
+		for (var i = 0, l = aMenuItems.length; i < l; i++) {
+			if (aMenuItems[i].content) {
+				contentHtml += 
+					'<div class="accordian-item">\
+						<div class="menu-item accordian-header">\
+							<div class="icon info"></div>\
+							' + aMenuItems[i].title + '\
+						</div>\
+						<div class="accordian-content">\
+							' + this.buildContent(aMenuItems[i].content) + '\
+						</div>';
+			} else {
+				var selected = ("guide" === this.settings.selected.type && aMenuItems[i].url === this.settings.selected.data) ? 'selected' : '';
+				contentHtml += 
+					'<div class="menu-item ' + selected + '" data-guide-url="' + aMenuItems[i].url + '">\
+						' + aMenuItems[i].title + '\
+					</div>';
+			}
+		}
+
+		return contentHtml;
+	}
 
     Accordian.prototype.buildOut = function() {
-		//_.data 를 이용해서 wrapper class 영역의 html 을 채워준다.
+		//_.apiData 를 이용해서 wrapper class 영역의 html 을 채워준다.
 		var _ = this;
-		//console.log(_.data);
-		var classesHtml = $.map( _.data, function( classObj, classIndex ) {
-			var methodsHtml = $.map( classObj.methods, function( method, methodIndex) {
-				var methodHtml = _.methodTemplate({
-					methodName: method.name,
-					classIndex: classIndex,
-					methodIndex: methodIndex
+		//console.log(_.apiData);
+
+		//가이드 영역 메뉴 갱신
+		if (_.guideData) {
+			var sideMenuHtml = this.buildContent(_.guideData);
+			_.$sideMenu.prepend(sideMenuHtml);
+		};
+
+		//API 메뉴 영역 갱신
+		if (_.apiData) {
+			var classesHtml = $.map( _.apiData, function( classObj, classIndex ) {
+				var methodsHtml = $.map( classObj.methods, function( method, methodIndex) {
+					//선택 상태를 표시
+					var selected = 
+						(_.settings.selected
+						&& "api" === _.settings.selected.type 
+						&& method.name === _.settings.selected.data.name
+						&& classObj.className === _.settings.selected.data.className ) ? 'selected' : '';
+
+					var methodHtml = _.methodTemplate({
+						methodName: method.name,
+						classIndex: classIndex,
+						methodIndex: methodIndex,
+						selected : selected
+					});
+					return methodHtml;
+				}).join('');
+				var classHtml = _.classTemplate({
+					className: classObj.className,
+					methods: methodsHtml,
 				});
-				return methodHtml;
+				return classHtml;
 			}).join('');
-			var classHtml = _.classTemplate({
-				className: classObj.className,
-				methods: methodsHtml,
-			});
-			return classHtml;
-		}).join('');
-		_.$classesContainer.html(classesHtml);
+			_.$classesContainer.html(classesHtml);
+		}
+
+		//선택된 메뉴의 상위 아이템에 대해 선택된 상태로 변경
+		var $el = $('.selected')
+		$el.parents('.accordian-content').show();
+		$el.parents('.accordian-item').children('.menu-item').addClass('selected');
     };
 
     Accordian.prototype.init = function() {
@@ -120,6 +180,10 @@
 				$accordianContent.slideDown({});							
 			}			
 		}
+
+		//TODO: 로컬 스토리지 지원 범위에 따른 지원
+		var nMenuScrollTop = _.$sideMenu.scrollTop();
+		localStorage.setItem(LOCALSTRG_MENU_SCROLL_TOP, nMenuScrollTop);
 	};
 	
     Accordian.prototype.initializeEvents = function() {
@@ -136,7 +200,7 @@
 				
 				var classIndex = data.classIndex;
 				var methodIndex = data.methodIndex;
-				var classObj = this.data[data.classIndex];
+				var classObj = this.apiData[data.classIndex];
 				var contentData = classObj.methods[methodIndex];
 				contentData.className = classObj.className;
 				//$(this.$accordian).trigger("showArticle", [contentData]);
@@ -153,6 +217,10 @@
 					title : $(e.target).text()
 				}
 			}
+
+			//TODO: 로컬 스토리지 지원 범위에 따른 지원
+			var nMenuScrollTop = _.$sideMenu.scrollTop();
+			localStorage.setItem(LOCALSTRG_MENU_SCROLL_TOP, nMenuScrollTop);
 
 			//If the selected items has a valid data, then request to update an article.
 			if (articleData) {

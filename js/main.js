@@ -71,22 +71,29 @@
 	}
 
 	$( window ).load(function() {
+		var info = urlToArticleParam(location.href);
+		if (!info) {
+			return;
+		}
+
 		$(".accordian").accordian({
-			data: JINDO_APIS
+			apiData: JINDO_APIS,
+			guideData : GUIDES,
+			selected : info
 		}).on('showArticle', function(e, data) {
 			//URL 변경
 			changeUrl(data);
 		});;
 		
-		//문서 갱신 - 현재 url 을 파싱하여 그에 맞는 문서를 노출한다.
-		var htParam = urlToArticleParam(location.href);
-		if (htParam) {
-			//타이틀 변경 (for disquss)
-			$("title").text(htParam.title);
+		/**
+		 * 문서 갱신 - 현재 url 을 파싱하여 그에 맞는 문서를 노출한다.
+		 */
 
-			//아티클 업데이트
-			ArticleView.updateArticle(htParam);
-		}
+		//타이틀 변경 (for disquss)
+		$("title").text(info.title);
+
+		//아티클 업데이트
+		ArticleView.updateArticle(info);
 	});
 
 })();

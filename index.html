@@ -7,8 +7,8 @@
 		<div class="logo-container">
 			<a href="#" class="logo"><img src="./img/jindoToJqueryLogo.png"></a>
 	    </div>
-		<div class="accordian">
-			<div class="accordian-item">
+		<div class="accordian" id="side_menu">
+			<!--div class="accordian-item">
 				<div class="menu-item accordian-header">
 					<div class="icon info"></div>
 					마이그레이션 안내
@@ -37,7 +37,7 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</div-->
 			<div class="accordian-item">
 				<div class="menu-item accordian-header">
 					<div class="icon wrapper"></div>
@@ -66,7 +66,7 @@
 </div>	
 </script>
 <script type="text/template" id="method-template">
-<div class="menu-item" data-class-index="<%= classIndex %>" data-method-index="<%= methodIndex %>">
+<div class="menu-item <%= selected %>" data-class-index="<%= classIndex %>" data-method-index="<%= methodIndex %>">
 <%= methodName %>
 </div>
 </script>

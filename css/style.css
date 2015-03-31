@@ -206,6 +206,7 @@
 	
 	.accordian-content > .menu-item.selected {
 		font-weight: 700;
+		color : red;
 	}
 
 	article > .comments {
