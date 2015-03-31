@@ -37,8 +37,10 @@
 			_.data = settings.data; // Wrapper Class 의 정보를 담은 객체
  			_.$classesContainer = $(".classes-container", _.$accordian);
 
+ 			//Build HTML
             _.buildOut();
 
+            //Element
 			_.$accordianHeaders = $(".accordian-header", _.$accordian);
 			
 			_.$menuItems = $(".accordian-content > .menu-item", _.$accordian);
