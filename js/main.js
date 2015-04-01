@@ -98,7 +98,7 @@
 		 */
 
 		//타이틀 변경 (for disquss)
-		$("title").text(info.title);
+		$("title").text(info.data.title);
 
 		//아티클 업데이트
 		ArticleView.updateArticle(info);
