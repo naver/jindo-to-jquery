@@ -18,6 +18,10 @@
     'use strict';
     var Accordian = window.Accordian || {};
     var LOCALSTRG_MENU_SCROLL_TOP = 'menuScrollTop';
+    var EXPAND_BUTTON_HTML = '\
+    						<div class="icon">\
+								<svg viewBox="0 0 24 24" height="100%" width="100%" preserveAspectRatio="xMidYMid meet" fit="" style="pointer-events: none; display: block;"><g><path d="M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z"></path></g></svg>\
+							</div>';
 
     Accordian = (function() {
 
@@ -79,12 +83,13 @@
 						<div class="menu-item accordian-header">\
 							<div class="icon info"></div>\
 							' + aMenuItems[i].title + '\
+							' + EXPAND_BUTTON_HTML + '\
 						</div>\
 						<div class="accordian-content">\
 							' + this.buildContent(aMenuItems[i].content) + '\
 						</div>';
 			} else {
-				var selected = ("guide" === this.settings.selected.type && aMenuItems[i].url === this.settings.selected.data) ? 'selected' : '';
+				var selected = ("guide" === this.settings.selected.type && aMenuItems[i].url === this.settings.selected.data.url) ? 'selected' : '';
 				contentHtml += 
 					'<div class="menu-item ' + selected + '" data-guide-url="' + aMenuItems[i].url + '">\
 						' + aMenuItems[i].title + '\

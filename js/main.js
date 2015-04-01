@@ -18,10 +18,11 @@
 		for (var i = 0, len = JINDO_APIS.length; i < len; i++) {
 			if (JINDO_APIS[i].className.indexOf(sClassName) != -1) {
 				for (var j = 0, l = JINDO_APIS[i].methods.length; j < l; j++) {
-					console.log(sMethodName + " == " + JINDO_APIS[i].methods[j].name);
+					//console.log(sMethodName + " == " + JINDO_APIS[i].methods[j].name);
 					if (JINDO_APIS[i].methods[j].name.indexOf(sMethodName) != -1) {
 						var ret = JINDO_APIS[i].methods[j];
 						ret.className = sClassName;
+						ret.title = (sClassName === 'jindo' ? '' : sClassName + '.') + sMethodName;
 
 						return ret;
 					}
@@ -34,7 +35,7 @@
 	}
 
 	/**
-	 * TODO: 가이드도 해시테이블로 관리하자.
+	 * TODO: guideList.js 와 통합할 수 있는 방안을 찾자!
 	 */
 	function getGuideTitle(sGuideUrl) {
 		var htGuideTitle = {
@@ -48,7 +49,7 @@
 	function urlToArticleParam(sUrl) {
 		var htRetParam = {};
 		var sType = "guide";//기본값
-		var sParam = "html/guide.usage.html";//가본값
+		var sParam = "html/guide.usage.html";//기본값
 
 		//파라미터 파싱
 		var aMatched = sUrl.match(/type=([^&]*)&?/);
@@ -65,10 +66,8 @@
 		if (sType === 'api') {
 			var aApi = sParam.split('_');
 			htRetParam.data = getMethodInfo(aApi[0], aApi[1]);
-			htRetParam.title = aApi[0] + ' - ' + aApi[1];
 		} else if (sType === 'guide') {
-			htRetParam.data = sParam;
-			htRetParam.title = getGuideTitle(sParam);
+			htRetParam.data = { url : sParam, title : getGuideTitle(sParam)};
 		} else {
 			return null;
 		}
