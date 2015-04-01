@@ -7,7 +7,7 @@ var Comments = (function() {
 			//$('#code_comments').html(disqusHtml);
 
 			if ($('#code_comments').length == 0) {
-				$parent.append('<div class="comments" id="code_comments">/')
+				$parent.append('<div class="comments" id="code_comments">/');
 			}
 
 			$('#code_comments').html('<img src="./img/comments.png">');
