@@ -26,13 +26,9 @@ var ArticleView = (function() {
 			
 		window.jsbinified = undefined;
 		$('article').html($article);
-
-		//comments 영역이 붙여진 후에 보여주기
-		Comments.show();
 	}
 
 	function _updateGuide(data) {
-		//console.log(data);
 		var tplText = $("#guide-template").text();
 		var guideTpl = _.template(tplText);
 		var guideHtml = guideTpl({title : 'guide', description : 'test', guideUrl : data });

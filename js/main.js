@@ -82,6 +82,9 @@
 			return;
 		}
 
+		/**
+		 * 메뉴 초기화
+		 */
 		$(".accordian").accordian({
 			apiData: JINDO_APIS,
 			guideData : GUIDES,
@@ -100,6 +103,9 @@
 
 		//아티클 업데이트
 		ArticleView.updateArticle(info);
+
+		//comments
+		Comments.show($('article'));
 	});
 
 })();
