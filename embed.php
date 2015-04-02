@@ -7,6 +7,9 @@ $options = array(
     ),
 );
 
+header("Content-type: text/html");
+
+
 $context  = stream_context_create($options);
 $result = file_get_contents("http://jindo.nhncorp.com:3000/".$bin."/embed", false, $context);
 
