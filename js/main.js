@@ -5,8 +5,8 @@
 		if (htArticleData.type === 'guide') {
 			param = htArticleData.data;
 		} else if (htArticleData.type === 'api') {
-			var methodInfo = htArticleData.data;
-			param = methodInfo.className + '_' + methodInfo.name
+			var prop = htArticleData.data;
+			param = prop.className + '_' + prop.name;
 		} else {
 			return;
 		}
@@ -14,15 +14,20 @@
 		location.href = 'index.html?type=' + htArticleData.type + '&param=' + param;
 	}
 
-	function getMethodInfo(sClassName, sMethodName) {
+	function getPropInfo(isMethod, sClassName, sPropName) {
 		for (var i = 0, len = JINDO_APIS.length; i < len; i++) {
 			if (JINDO_APIS[i].className.indexOf(sClassName) != -1) {
-				for (var j = 0, l = JINDO_APIS[i].methods.length; j < l; j++) {
-					//console.log(sMethodName + " == " + JINDO_APIS[i].methods[j].name);
-					if (JINDO_APIS[i].methods[j].name.indexOf(sMethodName) != -1) {
-						var ret = JINDO_APIS[i].methods[j];
+				var prop = JINDO_APIS[i].property;
+				if (isMethod) {
+					prop = JINDO_APIS[i].methods;
+				}
+
+				for (var j = 0, l = prop.length; j < l; j++) {
+					console.log(sPropName + " == " + prop[j].name);
+					if (prop[j].name.indexOf(sPropName) != -1) {
+						var ret = prop[j];
 						ret.className = sClassName;
-						ret.title = (sClassName === 'jindo' ? '' : sClassName + '.') + sMethodName;
+						ret.title = (sClassName === 'jindo' ? '' : sClassName + '.') + sPropName;
 
 						return ret;
 					}
@@ -46,7 +51,7 @@
 		return htGuideTitle[sGuideUrl];
 	}
 
-	function urlToArticleParam(sUrl) {
+	function urlToArticleInfo(sUrl) {
 		var htRetParam = {};
 		var sType = "guide";//기본값
 		var sParam = "html/guide.usage.html";//기본값
@@ -65,7 +70,11 @@
 		htRetParam.type = sType;
 		if (sType === 'api') {
 			var aApi = sParam.split('_');
-			htRetParam.data = getMethodInfo(aApi[0], aApi[1]);
+			var isMethod = false;
+			if (aApi[1].search(/\(\s*\)/) != -1) {
+				isMethod = true;	
+			}
+			htRetParam.data = getPropInfo(isMethod, aApi[0], aApi[1]);
 		} else if (sType === 'guide') {
 			htRetParam.data = { url : sParam, title : getGuideTitle(sParam)};
 		} else {
@@ -76,7 +85,7 @@
 	}
 
 	$( window ).load(function() {
-		var info = urlToArticleParam(location.href);
+		var info = urlToArticleInfo(location.href);
 		if (!info) {
 			return;
 		}

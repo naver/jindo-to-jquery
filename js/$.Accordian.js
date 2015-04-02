@@ -35,6 +35,7 @@
                 animating: false,
                 classTemplate: underscore.template($("#class-template").text()),
                 methodTemplate: underscore.template($("#method-template").text()),
+                propertyTemplate: underscore.template($("#property-template").text()),
                 verticalScrolling: false
             };
 
@@ -100,6 +101,42 @@
 		return contentHtml;
 	}
 
+	function _toPropertyHtml(classObj, classIndex, property, propertyIndex) {
+		var _ = this;
+		//선택 상태를 표시
+		var selected = 
+			(_.settings.selected
+			&& "api" === _.settings.selected.type 
+			&& property.name === _.settings.selected.data.name
+			&& classObj.className === _.settings.selected.data.className ) ? 'selected' : '';
+
+		var html = _.propertyTemplate({
+			classIndex: classIndex,
+			propertyName: property.name,
+			propertyIndex: propertyIndex,
+			selected : selected
+		});
+		return html;
+	}
+
+	function _toMethodHtml(classObj, classIndex, method, methodIndex) {
+		var _ = this;
+		//선택 상태를 표시
+		var selected = 
+			(_.settings.selected
+			&& "api" === _.settings.selected.type 
+			&& method.name === _.settings.selected.data.name
+			&& classObj.className === _.settings.selected.data.className ) ? 'selected' : '';
+
+		var methodHtml = _.methodTemplate({
+			methodName: method.name,
+			classIndex: classIndex,
+			methodIndex: methodIndex,
+			selected : selected
+		});
+		return methodHtml;
+	}
+
     Accordian.prototype.buildOut = function() {
 		//_.apiData 를 이용해서 wrapper class 영역의 html 을 채워준다.
 		var _ = this;
@@ -114,24 +151,13 @@
 		//API 메뉴 영역 갱신
 		if (_.apiData) {
 			var classesHtml = $.map( _.apiData, function( classObj, classIndex ) {
-				var methodsHtml = $.map( classObj.methods, function( method, methodIndex) {
-					//선택 상태를 표시
-					var selected = 
-						(_.settings.selected
-						&& "api" === _.settings.selected.type 
-						&& method.name === _.settings.selected.data.name
-						&& classObj.className === _.settings.selected.data.className ) ? 'selected' : '';
+				//프로퍼티, 메소드 HTML
+				var propertyHtml = $.map( classObj.property, $.proxy(_toPropertyHtml, _, classObj, classIndex)).join('');
+				var methodsHtml = $.map( classObj.methods, $.proxy(_toMethodHtml, _, classObj, classIndex)).join('');
 
-					var methodHtml = _.methodTemplate({
-						methodName: method.name,
-						classIndex: classIndex,
-						methodIndex: methodIndex,
-						selected : selected
-					});
-					return methodHtml;
-				}).join('');
 				var classHtml = _.classTemplate({
 					className: classObj.className,
+					properties : propertyHtml,
 					methods: methodsHtml,
 				});
 				return classHtml;
@@ -146,7 +172,6 @@
     };
 
     Accordian.prototype.init = function() {
-
         var _ = this;
 
         if (!$(_.$accordian).hasClass('accordian-initialized')) {
@@ -202,13 +227,20 @@
 
 			if(data.classIndex !== undefined) {
 				$(e.target).addClass("selected");
-				
-				var classIndex = data.classIndex;
-				var methodIndex = data.methodIndex;
 				var classObj = this.apiData[data.classIndex];
-				var contentData = classObj.methods[methodIndex];
+				var classIndex = data.classIndex;
+				var contentData = null;
+
+				if (data.methodIndex !== undefined) {
+					contentData = classObj.methods[data.methodIndex];
+				} else if (data.propertyIndex !== undefined) {
+					contentData = classObj.property[data.propertyIndex];
+				} else {
+					//ERROR
+					return;
+				}
+
 				contentData.className = classObj.className;
-				//$(this.$accordian).trigger("showArticle", [contentData]);
 				
 				articleData = {
 					type : 'api',

@@ -34,15 +34,24 @@
 		</div>
 	</div>
 	<div class="accordian-content">
+		<%= properties %>
 		<%= methods %>
 	</div>
 </div>	
 </script>
+
+<script type="text/template" id="property-template">
+<div class="menu-item <%= selected %>" data-class-index="<%= classIndex %>" data-property-index="<%= propertyIndex %>">
+	property - <%= propertyName %>
+</div>
+</script>
+
 <script type="text/template" id="method-template">
 <div class="menu-item <%= selected %>" data-class-index="<%= classIndex %>" data-method-index="<%= methodIndex %>">
 <%= methodName %>
 </div>
 </script>
+
 <script type="text/template" id="article-template">
 	<section class="header">
 		<div>
