@@ -14,8 +14,8 @@ var ArticleView = (function() {
 		var templateData = {
 			methodName: data.title/*data.className+"."+data.name/*+"()"*/,
 			description: data.description,
-			jindoJsbin: data.jindoCodeUrl ? "http://jindo.nhncorp.com:3000/"+data.jindoCodeUrl +'/embed?js&height=450px' : testJsBinUrl,
-			jqueryJsbin: data.jqueryCodeUrl ? "http://jindo.nhncorp.com:3000/"+data.jqueryCodeUrl +'/embed?js&height=450px' : testJsBinUrl
+			jindoJsbin: data.jindoCodeUrl ? "./embed.php?bin="+data.jindoCodeUrl +'&height=450px' : testJsBinUrl,
+			jqueryJsbin: data.jqueryCodeUrl ? "./embed.php?bin="+data.jqueryCodeUrl +'&height=450px' : testJsBinUrl
 		}
 
 		$('article').html('');
@@ -26,6 +26,22 @@ var ArticleView = (function() {
 			
 		window.jsbinified = undefined;
 		$('article').html($article);
+		
+		// jsbin Embedder 에 iframe이 로딩 완료될때 마다 샐행할 핸들러를 전달
+		JsbinEmbedder(function(evt){
+			new JsbinUpdater({
+				iframe: evt.currentTarget
+			});
+			var url = evt.currentTarget.contentDocument.location;
+			var $panelBtns = $(evt.currentTarget.contentDocument).contents().find("#panels a.active");
+			var $htmlBtn = $panelBtns[0];
+			var $outputBtn = $panelBtns[2];
+			
+			$htmlBtn.click();
+			$outputBtn.click();
+			
+			evt.currentTarget.style.visibility = 'visible';
+		});
 	}
 
 	function _updateGuide(data) {
@@ -44,3 +60,28 @@ var ArticleView = (function() {
 		updateArticle : updateArticle
 	};
 })();
+
+function JsbinUpdater(htOption){
+	this.elIframe = htOption.iframe;
+	this.elSaveBtn = htOption.elSaveBtn;
+	
+	this.javascript;
+	this.html;
+	this.css;
+	this.bin;
+
+	this.getContents();
+}
+
+JsbinUpdater.prototype.getContents = function() {
+	var $panelBtns = $(this.elIframe.contentDocument).contents().find(".editbox");
+	console.log("HTML", $($panelBtns[0]).text());
+	this.html = $($panelBtns[0]).text();
+	console.log("CSS", $($panelBtns[1]).text());
+	this.css = $($panelBtns[0]).text();
+	console.log("JAVASCRIPT", $($panelBtns[2]).text());
+	this.javascript = $($panelBtns[0]).text();
+	console.log("BIN", this.elIframe.src.split("bin=")[1]);
+	this.bin = this.elIframe.src.split("bin=")[1];
+	
+};

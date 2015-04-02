@@ -18,7 +18,6 @@
 		for (var i = 0, len = JINDO_APIS.length; i < len; i++) {
 			if (JINDO_APIS[i].className.indexOf(sClassName) != -1) {
 				for (var j = 0, l = JINDO_APIS[i].methods.length; j < l; j++) {
-					//console.log(sMethodName + " == " + JINDO_APIS[i].methods[j].name);
 					if (JINDO_APIS[i].methods[j].name.indexOf(sMethodName) != -1) {
 						var ret = JINDO_APIS[i].methods[j];
 						ret.className = sClassName;
