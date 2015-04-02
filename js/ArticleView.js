@@ -10,8 +10,7 @@ var ArticleView = (function() {
 
 	function _updateAPI(data) {
 		var testJsBinUrl = 'http://jsbin.com/iwovaj/74/embed?js&height=450px';
-		var testJsBinUrl = 'http://jsbin.com/iwovaj/74/embed?js&height=450px';
-
+		
 		var templateData = {
 			methodName: data.title/*data.className+"."+data.name/*+"()"*/,
 			description: data.description,
@@ -34,7 +33,11 @@ var ArticleView = (function() {
 		var guideTpl = _.template(tplText);
 		var guideHtml = guideTpl({title : data.title, description : 'test', guideUrl : data.url });
 
-		$('article').html(guideHtml);
+		//$('article').html(guideHtml);
+		var $guideContent = $(guideHtml);
+
+		$guideContent.filter('.content').load(data.url);
+		$('article').html($guideContent);
 	}
 
 	return {
