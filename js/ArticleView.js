@@ -10,12 +10,13 @@ var ArticleView = (function() {
 
 	function _updateAPI(data) {
 		var testJsBinUrl = 'http://jsbin.com/iwovaj/74/embed?js&height=450px';
+		var testJsBinUrl = 'http://jsbin.com/iwovaj/74/embed?js&height=450px';
 
 		var templateData = {
 			methodName: data.title/*data.className+"."+data.name/*+"()"*/,
 			description: data.description,
-			jindoJsbin: data.jindoCodeUrl ? data.jindoCodeUrl +'?js&height=450px' : testJsBinUrl,
-			jqueryJsbin: data.jqueryCodeUrl ? data.jqueryCodeUrl +'?js&height=450px' : testJsBinUrl
+			jindoJsbin: data.jindoCodeUrl ? "http://jindo.nhncorp.com:3000/"+data.jindoCodeUrl +'/embed?js&height=450px' : testJsBinUrl,
+			jqueryJsbin: data.jqueryCodeUrl ? "http://jindo.nhncorp.com:3000/"+data.jqueryCodeUrl +'/embed?js&height=450px' : testJsBinUrl
 		}
 
 		$('article').html('');
