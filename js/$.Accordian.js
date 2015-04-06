@@ -20,7 +20,7 @@
     var LOCALSTRG_MENU_SCROLL_TOP = 'menuScrollTop';
     var EXPAND_BUTTON_HTML = '\
     						<div class="icon">\
-								<svg viewBox="0 0 24 24" height="100%" width="100%" preserveAspectRatio="xMidYMid meet" fit="" style="pointer-events: none; display: block;"><g><path d="M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z"></path></g></svg>\
+								<svg viewBox="0 0 24 24" height="100%" width="100%" preserveAspectRatio="xMidYMid meet" fit="" style="pointer-events: none;"><g><path d="M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z"></path></g></svg>\
 							</div>';
 
     Accordian = (function() {
