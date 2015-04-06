@@ -206,6 +206,7 @@ function JsbinEmbedder(onloadHandler){
     iframe._src = url.split('&')[0]; // support for google slide embed
     iframe.className = link.className; // inherit all the classes from the link
     iframe.id = link.id; // also inherit, giving more style control to the user
+
     iframe.style.border = '1px solid #aaa';
 
     var query = getQuery(link.search);

@@ -88,7 +88,8 @@
 						</div>\
 						<div class="accordian-content">\
 							' + this.buildContent(aMenuItems[i].content) + '\
-						</div>';
+						</div>\
+					</div>';
 			} else {
 				var selected = ("guide" === this.settings.selected.type && aMenuItems[i].url === this.settings.selected.data.url) ? 'selected' : '';
 				contentHtml += 

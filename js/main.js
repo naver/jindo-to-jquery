@@ -40,15 +40,24 @@
 	}
 
 	/**
-	 * TODO: guideList.js 와 통합할 수 있는 방안을 찾자!
+	 * 선택된 메뉴를 타이틀로 사용
 	 */
-	function getGuideTitle(sGuideUrl) {
-		var htGuideTitle = {
-			'html/guide.usage.html' : '라이브러리 사용법',
-			'html/guide.10min.html' : '10분 요리'
-		};
+	function getDefaultTitle() {
+		var $selected = $('.selected');
+		//var len = $selected.length;
 
-		return htGuideTitle[sGuideUrl];
+		var title = $selected.last().text().trim();
+		// $selected.each(function(i) {
+		// 	if (i != 0) {
+		// 		title += $(this).text().trim();
+
+		// 		if (i != len - 1) {
+		// 			title += ' - '
+		// 		}
+		// 	}
+		// });
+
+		return title;
 	}
 
 	function urlToArticleInfo(sUrl) {
@@ -76,7 +85,7 @@
 			}
 			htRetParam.data = getPropInfo(isMethod, aApi[0], aApi[1]);
 		} else if (sType === 'guide') {
-			htRetParam.data = { url : sParam, title : getGuideTitle(sParam)};
+			htRetParam.data = { url : sParam };
 		} else {
 			return null;
 		}
@@ -105,6 +114,10 @@
 		/**
 		 * 문서 갱신 - 현재 url 을 파싱하여 그에 맞는 문서를 노출한다.
 		 */
+		//타이틀이 지정되지 않은 경우, 선택된 메뉴를 기준으로 타이틀을 정한다.
+		if (!info.data.title) {
+			info.data.title = getDefaultTitle();
+		}
 
 		//타이틀 변경 (for disquss)
 		$("title").text(info.data.title);

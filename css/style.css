@@ -183,10 +183,23 @@
 	}
 		
 	article > section.content {
-		text-align: center;
-		height : 450px; /* 임시값 */
+		/*text-align: center;*/
+		min-height: 450px;
+		/*height : 450px; /* 임시값 */
 		/*max-width: 912px;*/
 	}
+
+	/** 테스트 */
+	article.api > section.content {
+		text-align: center;
+		min-height: 450px;
+	}
+
+	article.readme > section.content {
+		margin : 30px;
+		min-height: 450px;
+	}
+
 	article > section.content > .col {
 		width: 50%;
 		float: left;

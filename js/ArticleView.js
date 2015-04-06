@@ -9,7 +9,10 @@ var ArticleView = (function() {
 	}
 
 	function _updateAPI(data) {
-		var testJsBinUrl = 'http://jsbin.com/iwovaj/74/embed?js&height=450px';
+		//var testJsBinUrl = 'http://jsbin.com/iwovaj/74/embed?js&height=450px';
+		var testJsBinUrl = 'http://jsbin.com/heqova/embed?js&height=450px';
+		//data.jindoCodeUrl = null;
+		var $article = $('article');
 		
 		var templateData = {
 			methodName: data.title/*data.className+"."+data.name/*+"()"*/,
@@ -18,7 +21,9 @@ var ArticleView = (function() {
 			jqueryJsbin: data.jqueryCodeUrl ? "./embed.php?bin="+data.jqueryCodeUrl +'&height=450px' : testJsBinUrl
 		}
 
-		$('article').html('');
+		$article.addClass('api');
+		$article.html('');
+		
 		var articleHtml = '';
 	    var articleTpl = _.template($("#article-template").text()),
 		articleHtml = articleTpl(templateData);
@@ -52,12 +57,14 @@ var ArticleView = (function() {
 		var tplText = $("#guide-template").text();
 		var guideTpl = _.template(tplText);
 		var guideHtml = guideTpl({title : data.title, description : 'test', guideUrl : data.url });
+		var $article = $('article');
 
+		$article.addClass('readme');
 		//$('article').html(guideHtml);
 		var $guideContent = $(guideHtml);
 
 		$guideContent.filter('.content').load(data.url);
-		$('article').html($guideContent);
+		$article.html($guideContent);
 	}
 
 	return {
