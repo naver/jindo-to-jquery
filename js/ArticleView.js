@@ -34,13 +34,17 @@ var ArticleView = (function() {
 			});
 			var url = evt.currentTarget.contentDocument.location;
 			var $panelBtns = $(evt.currentTarget.contentDocument).contents().find("#panels a.active");
+			
+			
 			var $htmlBtn = $panelBtns[0];
 			var $outputBtn = $panelBtns[2];
 			
 			$htmlBtn.click();
 			$outputBtn.click();
-			
-			evt.currentTarget.style.visibility = 'visible';
+
+			var $outLink = $($(evt.currentTarget.contentDocument).contents().find(".menu a.brand.button.group")[0]);
+			$outLink.attr("href", "http://jindo.nhncorp.com:3000" + $outLink.attr("href"));
+			$($(evt.currentTarget.contentDocument).contents().find(".menu a.button")[1]).remove()
 		});
 	}
 
@@ -63,25 +67,37 @@ var ArticleView = (function() {
 
 function JsbinUpdater(htOption){
 	this.elIframe = htOption.iframe;
-	this.elSaveBtn = htOption.elSaveBtn;
-	
-	this.javascript;
-	this.html;
-	this.css;
-	this.bin;
+	this.$elSaveBtn = null;
 
-	this.getContents();
+	this.bin = this.elIframe.src.split("bin=")[1];
+	
+	this.jsbinData = this.getContents();
+	
+	$(this.elIframe.contentWindow.document).keydown(function(evt) {
+		this.jsbinData = this.getContents();
+		// Activate Save Button
+		if(this.$elSaveBtn === null) {
+			this.$elSaveBtn = $("<a>업데이트</a>");
+			console.log($(".menu", $(this.elIframe.contentWindow.document))[0]);
+			$($(".menu", $(this.elIframe.contentWindow.document))[0]).append(this.$elSaveBtn);
+			this.$elSaveBtn.on("click", function(){
+				// JSBIN API를 통해 POST 요청을 보내고 (이 또한 별도 마련된 프록시를 거침)
+				// 성공 응답이 오면 스스로를 제거한다.
+				this.$elSaveBtn.remove();
+				this.$elSaveBtn = null;	
+				alert("!");
+			}.bind(this));
+		}
+	}.bind(this));
 }
 
 JsbinUpdater.prototype.getContents = function() {
-	var $panelBtns = $(this.elIframe.contentDocument).contents().find(".editbox");
-	console.log("HTML", $($panelBtns[0]).text());
-	this.html = $($panelBtns[0]).text();
-	console.log("CSS", $($panelBtns[1]).text());
-	this.css = $($panelBtns[0]).text();
-	console.log("JAVASCRIPT", $($panelBtns[2]).text());
-	this.javascript = $($panelBtns[0]).text();
-	console.log("BIN", this.elIframe.src.split("bin=")[1]);
-	this.bin = this.elIframe.src.split("bin=")[1];
+	var binData = {};
+	var $editPanels = $(this.elIframe.contentDocument).contents().find(".editbox");
+	binData.html = $($editPanels[0]).text();
+	binData.css = $($editPanels[0]).text();
+	binData.javascript = $($editPanels[0]).text();
 	
+	return binData;
 };
+
