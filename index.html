@@ -1,7 +1,6 @@
 <meta charset="utf-8"/>
 <link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/jaguar.css">
-<!--link rel="stylesheet" href="css/bootstrap.min.css"-->
+<link rel="stylesheet" href="css/markdown.css">
 <body>
 <title>Jindo to jQuery Main</title>
 <aside class="sidebar">
@@ -44,7 +43,7 @@
 
 <script type="text/template" id="property-template">
 <div class="menu-item <%= selected %>" data-class-index="<%= classIndex %>" data-property-index="<%= propertyIndex %>">
-	property - <%= propertyName %>
+<%= propertyName %>
 </div>
 </script>
 
@@ -55,11 +54,9 @@
 </script>
 
 <script type="text/template" id="article-template">
-	<section class="header">
-		<div>
+	<section class="header markdown-body">
 		<h1><%= methodName %></h1>
 		<p><%= description %></p>
-		</div>
 	</section>
 	<section class="content">
 		<div class="col">
@@ -79,13 +76,11 @@
 </script>
 
 <script type='text/template' id='guide-template'>
-	<section class="header">
-		<div>
+	<section class="header markdown-body">
 		<h1><%= title %></h1>
 		<p><%= description %></p>
-		</div>
 	</section>
-	<section class="content">
+	<section class="content markdown-body">
 		<!-- TODO: 어떤식으로 구성할까? -->
 		<!--iframe style='width:100%;height:80%' src='<%= guideUrl %>'/-->
 	</section>

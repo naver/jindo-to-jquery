@@ -17,8 +17,8 @@ var ArticleView = (function() {
 		var templateData = {
 			methodName: data.title/*data.className+"."+data.name/*+"()"*/,
 			description: data.description,
-			jindoJsbin: data.jindoCodeUrl ? "./embed.php?bin="+data.jindoCodeUrl +'&height=450px' : testJsBinUrl,
-			jqueryJsbin: data.jqueryCodeUrl ? "./embed.php?bin="+data.jqueryCodeUrl +'&height=450px' : testJsBinUrl
+			jindoJsbin: data.jindoCodeUrl ? "http://jsbin.com/"+data.jindoCodeUrl +'/embed?js&height=450px' : testJsBinUrl,
+			jqueryJsbin: data.jqueryCodeUrl ?  "http://jsbin.com/"+data.jqueryCodeUrl +'/embed?js&height=450px' : testJsBinUrl
 		}
 
 		$article.addClass('api');
@@ -56,7 +56,7 @@ var ArticleView = (function() {
 	function _updateGuide(data) {
 		var tplText = $("#guide-template").text();
 		var guideTpl = _.template(tplText);
-		var guideHtml = guideTpl({title : data.title, description : 'test', guideUrl : data.url });
+		var guideHtml = guideTpl({title : data.title, description : data.description || '', guideUrl : data.url });
 		var $article = $('article');
 
 		$article.addClass('readme');

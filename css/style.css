@@ -8,6 +8,12 @@
 
 	}
 	
+	h1, 
+	p 
+	{
+		font-family: "Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;
+	}
+	
 	.sidebar,
 	.sidebar-content {
 		height: 100%;
@@ -91,7 +97,7 @@
 		left: -18px;
 		z-index: -1;
 	}
-
+	
 	.accordian > .accordian-item {
 		padding: 0 18px;
 		border-top: 1px solid #757575;
@@ -121,7 +127,7 @@
 	{
 		position: absolute;
 		left: 0;	
-		height: 48px;
+		height: 36px;
 
 		background-size: contain;
 		background-repeat: no-repeat;
@@ -140,14 +146,13 @@
 	/* 두번째 레벨 아코디언 */
  	.accordian > .accordian-item > .accordian-content > .accordian-item > .accordian-content > .menu-item  
 	{
-		padding-left: 36px;		
+		padding-left: 36px;	
+		color: rgba(255,255,255, .6);	
 	}
 	
 	
 	article {	
 		padding-left: 220px;
-		padding-right: 15px;
-
 		padding-bottom: 45px;
 
 		background: #f5f5f5;
@@ -155,12 +160,12 @@
 		
 	}
 	article > section {
-		width: 100%;
+		1width: 100%;
 		1padding-left: 36px;
 	}	
 	article > section.header {
-		height: 40px;
-		margin: 15px auto;
+		padding: 30px;
+		padding-bottom: 0;
 	}
 	
 	article > section.header h1 {
@@ -169,37 +174,26 @@
 		letter-spacing: -0.01em;
 		line-height: 48px;
 		margin: 0;
-		width: 40%;
-		float:left;
+		1width: 40%;
+		1float:left;
 		
 		1background-color: aqua;
 	}
-	
-	article > section.header > div {
-		position: relative;
-		1width: 100%;
-		1background-color: yellow;
-		height: 50px;
-		margin-left: 15px;
-		1margin-right: 15px;
-		max-width: 900px;
 
-
-	}
 	article > section.header p {
 		font-size: 16px;
 		font-family: "RobotoDraft",Helvetica,Arial,sans-serif;
 		font-weight: 300;
 		line-height: 24px;
-		float:left;
+		1float:left;
 		color: #777;
-		width: 60%;
+		1width: 60%;
 		1background-color:fuchsia;
 		background-color: transparent;
 		1margin-right: 15px;
 		margin: 5px auto;
 		margin-bottom: 15px;
-		text-align: right;
+		1text-align: right;
 		box-sizing: content-box;
 	}
 		
@@ -221,29 +215,27 @@
 		box-sizing: border-box;
 		min-height: 450px;
 	}
+	article > .comments {
+		padding : 30px;
+		clear: both;
+	}
 
 	article > section.content > .col {
 		width: 50%;
 		float: left;
 	}	
 	
-	article > section.content > h2 {
-		margin: 0;
-	}
 	article > section.content > h2> span {
 		font-size: 18px;
 	}
 	.jsbin-container {
-		padding-left: 15px;
 		box-sizing: border-box;
 		
 	}
 	
-	.accordian-content > .menu-item.selected {
-		font-weight: 700;
-		color : red;
+	.accordian > .accordian-item > .accordian-content > .accordian-item > .accordian-content > .menu-item.selected {
+		1font-weight: 700;
+		color : #ffffff;
+		1text-decoration: underline;
 	}
 
-	article > .comments {
-		padding : 15px;
-	}
