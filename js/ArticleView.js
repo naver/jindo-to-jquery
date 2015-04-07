@@ -38,7 +38,8 @@ var ArticleView = (function() {
 		if(data.className === 'jindo') {
 			className = '';
 		}
-		var category = (data.name.indexOf('()') === -1) ? 'method' : 'property'; 		
+		console.log(data.name);
+		var category = (data.name.indexOf('()') === -1) ? 'property' : 'method'; 		
 		return "http://jindo.dev.naver.com/docs/jindo/2.12.1/desktop/ko/classes/jindo"+className+".html#"+category+"_"+data.name.replace("()", '');
 	}
 
