@@ -191,9 +191,11 @@
 
 		var isPrimary = $accordianHeader.parent().parent()[0] === _.$accordian[0];
 
+		$(".accordian > .accordian-item > .accordian-content > .menu-item.selected").removeClass("selected");
+		
 		// 최상위 헤더일 때의 로직		
 		if(isPrimary) {
-			if($accordianHeader.hasClass('selected')) {
+			if($accordianHeader.hasClass('selected')) {				
 				$accordianHeader.removeClass('selected')
 				$accordianContent.slideUp({});
 			} else {
@@ -204,7 +206,7 @@
 		} else {
 			if($accordianHeader.hasClass('selected')) {
 				$accordianHeader.removeClass('selected')
-				$accordianContent.slideUp({});										
+				$accordianContent.slideUp({});				
 			} else {
 				$(".accordian-header", $accordianHeader.parent().parent()).filter(".selected").removeClass('selected').next().slideUp({});
 				$accordianHeader.addClass('selected')

@@ -9,15 +9,15 @@ var ArticleView = (function() {
 	}
 
 	function _updateAPI(data) {
-		//var testJsBinUrl = 'http://jsbin.com/iwovaj/74/embed?js&height=450px';
 		var testJsBinUrl = 'http://jsbin.com/heqova/embed?js&height=450px';
-		//data.jindoCodeUrl = null;
 		var $article = $('article');
-		
+
 		var templateData = {
-			methodName: data.title/*data.className+"."+data.name/*+"()"*/,
+			methodName: data.title,
 			description: data.description,
 			jindoJsbin: data.jindoCodeUrl ? "http://jsbin.com/"+data.jindoCodeUrl +'/embed?js&height=450px' : testJsBinUrl,
+			jindoApiUrl: _getJindoApiUrl(data),
+			jqueryApiUrl: _getJqueryApiUrl(data),
 			jqueryJsbin: data.jqueryCodeUrl ?  "http://jsbin.com/"+data.jqueryCodeUrl +'/embed?js&height=450px' : testJsBinUrl
 		}
 
@@ -31,26 +31,19 @@ var ArticleView = (function() {
 			
 		window.jsbinified = undefined;
 		$('article').html($article);
-		
-		// jsbin Embedder 에 iframe이 로딩 완료될때 마다 샐행할 핸들러를 전달
-		JsbinEmbedder(function(evt){
-			new JsbinUpdater({
-				iframe: evt.currentTarget
-			});
-			var url = evt.currentTarget.contentDocument.location;
-			var $panelBtns = $(evt.currentTarget.contentDocument).contents().find("#panels a.active");
-			
-			
-			var $htmlBtn = $panelBtns[0];
-			var $outputBtn = $panelBtns[2];
-			
-			$htmlBtn.click();
-			$outputBtn.click();
+	}
+	
+	function _getJindoApiUrl(data){
+		var className = "."+data.className;
+		if(data.className === 'jindo') {
+			className = '';
+		}
+		var category = (data.name.indexOf('()') === -1) ? 'method' : 'property'; 		
+		return "http://jindo.dev.naver.com/docs/jindo/2.12.1/desktop/ko/classes/jindo"+className+".html#"+category+"_"+data.name.replace("()", '');
+	}
 
-			var $outLink = $($(evt.currentTarget.contentDocument).contents().find(".menu a.brand.button.group")[0]);
-			$outLink.attr("href", "http://jindo.nhncorp.com:3000" + $outLink.attr("href"));
-			$($(evt.currentTarget.contentDocument).contents().find(".menu a.button")[1]).remove()
-		});
+	function _getJqueryApiUrl(data){
+		return "http://api.jquery.com/";
 	}
 
 	function _updateGuide(data) {
@@ -71,40 +64,3 @@ var ArticleView = (function() {
 		updateArticle : updateArticle
 	};
 })();
-
-function JsbinUpdater(htOption){
-	this.elIframe = htOption.iframe;
-	this.$elSaveBtn = null;
-
-	this.bin = this.elIframe.src.split("bin=")[1];
-	
-	this.jsbinData = this.getContents();
-	
-	$(this.elIframe.contentWindow.document).keydown(function(evt) {
-		this.jsbinData = this.getContents();
-		// Activate Save Button
-		if(this.$elSaveBtn === null) {
-			this.$elSaveBtn = $("<a>업데이트</a>");
-			console.log($(".menu", $(this.elIframe.contentWindow.document))[0]);
-			$($(".menu", $(this.elIframe.contentWindow.document))[0]).append(this.$elSaveBtn);
-			this.$elSaveBtn.on("click", function(){
-				// JSBIN API를 통해 POST 요청을 보내고 (이 또한 별도 마련된 프록시를 거침)
-				// 성공 응답이 오면 스스로를 제거한다.
-				this.$elSaveBtn.remove();
-				this.$elSaveBtn = null;	
-				alert("!");
-			}.bind(this));
-		}
-	}.bind(this));
-}
-
-JsbinUpdater.prototype.getContents = function() {
-	var binData = {};
-	var $editPanels = $(this.elIframe.contentDocument).contents().find(".editbox");
-	binData.html = $($editPanels[0]).text();
-	binData.css = $($editPanels[0]).text();
-	binData.javascript = $($editPanels[0]).text();
-	
-	return binData;
-};
-

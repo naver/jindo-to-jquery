@@ -4,8 +4,6 @@
 		padding: 0;
 		margin: 0;
 		background: #f5f5f5;
-		1font-family: "RobotoDraft",Helvetica,Arial,sans-serif;
-
 	}
 	
 	h1, 
@@ -82,9 +80,12 @@
 		overflow: auto;		 
 	}
 	
+
 	.accordian-content .accordian-header.selected {
 		1background:#3b7bfb;
 	}
+
+	.accordian > .accordian-item > .accordian-content > .menu-item.selected:before,
     .accordian-content .accordian-header.selected:before
 	{		
 		content: '';
@@ -96,6 +97,7 @@
 		top: 0;
 		left: -18px;
 		z-index: -1;
+		overflow: visible;
 	}
 	
 	.accordian > .accordian-item {
@@ -228,6 +230,35 @@
 	article > section.content > h2> span {
 		font-size: 18px;
 	}
+	
+	.jsbin-header > h2,
+	.jsbin-header > a {
+		display: inline-block;	
+		vertical-align: middle;
+				font-family: "Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;
+
+	}
+	
+	.jsbin-header > a {
+		text-decoration: none;
+		border-radius: 5px;
+		background-color: rgb(153, 153, 153);
+		color: #FFF;
+		padding: 0 3px;
+		padding-top: 2px;
+		height:20px;
+		font-size: 15px;
+		margin-left: 4px;
+		font-weight: 400;
+	}
+	
+	.jsbin-header > a : hover{
+		cursor: pointer;
+		background-color: transparent;
+		border: 2px rgb(153, 153, 153) solid;
+		color: rgb(153, 153, 153);
+		
+	}	
 	.jsbin-container {
 		box-sizing: border-box;
 		
