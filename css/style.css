@@ -12,6 +12,12 @@
 		font-family: "Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;
 	}
 	
+	a.menu-item {
+		color: #fff;
+		text-decoration: none;
+		display: block;
+	}
+	
 	.sidebar,
 	.sidebar-content {
 		height: 100%;

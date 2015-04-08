@@ -93,9 +93,9 @@
 			} else {
 				var selected = ("guide" === this.settings.selected.type && aMenuItems[i].url === this.settings.selected.data.url) ? 'selected' : '';
 				contentHtml += 
-					'<div class="menu-item ' + selected + '" data-guide-url="' + aMenuItems[i].url + '">\
+					'<a class="menu-item ' + selected + '" href="http://jindo.nhncorp.com/jindoTojquery/index.html?type=guide&param=' + aMenuItems[i].url + '">\
 						' + aMenuItems[i].title + '\
-					</div>';
+					</a>';					
 			}
 		}
 
@@ -113,6 +113,7 @@
 
 		var html = _.propertyTemplate({
 			classIndex: classIndex,
+			url: 'index.html?type=api&param=' + classObj.className + '_' + property.name,
 			propertyName: property.name,
 			propertyIndex: propertyIndex,
 			selected : selected
@@ -132,9 +133,11 @@
 		var methodHtml = _.methodTemplate({
 			methodName: method.name,
 			classIndex: classIndex,
+			url: 'index.html?type=api&param=' + classObj.className + '_' + method.name,
 			methodIndex: methodIndex,
 			selected : selected
 		});
+	
 		return methodHtml;
 	}
 

@@ -10,8 +10,12 @@
 		} else {
 			return;
 		}
-
-		location.href = 'index.html?type=' + htArticleData.type + '&param=' + param;
+		
+		//var $link = $("<a href=\""+'index.html?type=' + htArticleData.type + '&param=' + param+"\" ></a>");
+		//$("body").append($link);
+		//$link.click();
+		//location.href = 'index.html?type=' + htArticleData.type + '&param=' + param;
+		return 'index.html?type=' + htArticleData.type + '&param=' + param;
 	}
 
 	function getPropInfo(isMethod, sClassName, sPropName) {
@@ -107,8 +111,7 @@
 			guideData : GUIDES,
 			selected : info
 		}).on('showArticle', function(e, data) {
-			//URL 변경
-			changeUrl(data);
+			console.log('showArticle event triggered!');
 		});;
 		
 		/**
