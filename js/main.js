@@ -23,7 +23,6 @@
 				}
 
 				for (var j = 0, l = prop.length; j < l; j++) {
-					console.log(sPropName + " == " + prop[j].name);
 					if (prop[j].name.indexOf(sPropName) != -1) {
 						var ret = prop[j];
 						ret.className = sClassName;
@@ -64,13 +63,13 @@
 		var htRetParam = {};
 		var sType = "guide";//기본값
 		var sParam = "html/guide.usage.html";//기본값
-
+		
 		//파라미터 파싱
-		var aMatched = sUrl.match(/type=([^&]*)&?/);
+		var aMatched = sUrl.match(/type=([^&#]*)&?/);
 		if (aMatched) {
 			sType = aMatched[1];
 		}
-		aMatched = sUrl.match(/param=([^&]*)&?/);
+		aMatched = sUrl.match(/param=([^&#]*)&?/);
 		if (aMatched) {
 			sParam = aMatched[1];
 		}		
