@@ -51,6 +51,11 @@ var JINDO_APIS = [{
 	 	"jindoCodeUrl": "nozuhi",
 		"jqueryCodeUrl": "higepi"
 	}, {
+		"name": "continue()",
+		"description": "Continue() 메서드는 forEach(), filter(), map() 메서드의 루프에서 나머지 명령을 실행하지 않고 다음 루프로 건너뛴다. 내부적으로는 강제로 예외를 발생시키는 구조이므로, try - catch 영역에서 이 메서드를 실행하면 정상적으로 동작하지 않을 수 있다.",
+		"jindoCodeUrl": "fusupa",
+		"jqueryCodeUrl": "befuvo"
+	}, {
 		"name": "concat()",
 		"description": "배열을 결합해 새로운 배열을 반환한다.",
 		"jindoCodeUrl": "gawuzu",
