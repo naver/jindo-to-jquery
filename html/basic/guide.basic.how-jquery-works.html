@@ -1,5 +1,253 @@
 <html>
 <body>
-	10min Guide
+
+<h2>$ vs $()</h2>
+
+
+<pre class="brush: js">$("h1").remove()</pre>
+<p>
+	위와 같이 jQuery selection 에 대해 호출된 메서드는 $.fn 라는 네임스페이스에 속한다. 그리고 자동으로 이 selection (this) 로 파라미터로 받거나 반환값으로 사용한다.
+</p>
+<pre class="brush:js">$.ajax()</pre>
+<p>
+	위와 같이 $ 네임스페이스에 속한 메소드들은 selection 을 대상으로 하는 메소드가 아닌 유틸리티성 메소드를 의미한다. 자동으로 어떤 파라미터도 넘기지 않으며 반환값도 다양하다.
+</p>
+
+<h2>$( document ).ready()</h2>
+
+<pre>1. $(document).ready()</pre>
+<p>
+	페이지를 안전하게 조작할 수 있는 시점을 알려준다. 페이지 내 DOM 이 준비될 때 한번 호출.
+	<pre class="brush:js">
+	$(function() {
+    	//$(document).ready 와 동일
+
+	});</pre>
+</p>
+<pre >2. $(window).load() </pre>
+<p>
+	DOM 뿐만 아니라 전체 페이지(이미지, 스크립트, iframe)의 리소스가 준비되었을 때 호출
+</p>
+
+<h2>다른 라이브러리와의 충돌 피하기</h2>
+
+<p>
+$를 사용하는 다른 라이브러리와의 충돌을 피하고자 하는 경우
+</p>
+
+<p>
+1) Create a New Alias
+
+<pre class="brush:js">
+var $j = jQuery.noConflict();
+$j( document ).ready( function() {
+	//ready
+});
+</pre>
+</p>
+<p>
+2) 즉시 실행함수 형태
+<pre class="brush:js">
+jQuery.noConflict();
+(function( $ ) {
+    $( "div" ).hide();
+})(jQuery);
+</pre>
+</p>
+
+<p>
+2) $ 를 매개변수로 지정 - Ideal Solution
+
+<pre class="brush:js">jQuery.noConflict();
+jQuery( document ).ready((function( $ ) {
+    $( "div" ).hide();
+});
+</pre>
+</p>
+
+<h2>jQuery Object</h2>
+<h3>반환값</h3>
+<p>
+jQuery 의 반환 값은 array 형태의 collection 을 반환한다. Element 의 조작을 위한 여러 편의 인터페이스를 제공한다.
+</p>
+
+<p>
+첫 번째 jQuery object 반환
+<pre class="brush:js">
+$( "h1" ).eq(0);
+</pre>
+</p>
+
+<p>
+<xmp>첫 번째 <h1> element 반환</xmp>
+<pre class="brush:js">
+$( "h1" ).get( 0 );
+$( "h1" )[ 0 ];
+</pre>
+<p>
+
+<h3>Wrapping 객체의 유일성</h3>
+
+<p>
+1)jQuery로 래핑된 Object 는 unique 하다.
+<pre class="brush:js">
+$( "#logo") !== $("#logo")
+</pre>
+</p>
+<p>
+2)하지만 element 는 아니다.
+<pre class="brush:js">
+var logo1 = $( "#logo" ).get( 0 );
+var logo2 = $( "#logo" ).get( 0 );
+
+logo1 === logo2
+</pre>
+</p>
+
+<p>
+<h3>실시간이 아님을 주의</h3>
+
+<pre class="brush:js">
+var allParagraphs = $( "p" );
+</pre>
+</p>
+<p>
+위 함수 호출 후  p 가 추가되거나 삭제되었을때 allParagraph 는 업데이트된 컨텐츠는 반영하지 않는다는 점을 유의하라. DOM 변경이 생겼다면 다시 호출해줘야 한다.
+</p>
+<pre class="brush:js">
+allParagraphs = $( "p" );
+</pre>
+
+<h3>Wrapping Up</h3>
+
+jQuery Object 를 가지고 element 를 create 하거나 select 하는 경우에 그 result 는 새로운 jQuery Object 이다.
+
+</p>
+
+<h2>탐색</h2>
+<p>
+<h3>Parents</h3>
+<pre class="brush:js">
+.parent(), .parents(), .parentsUntil(), .closest()
+</pre>
+</p>
+<p>
+<h3>Children</h3>
+<pre class="brush:js">.children() , .find()</pre>
+</p>
+
+<p>	
+<h3>Sibiling</h3>
+<pre class="brush:js">
+.prev(), .next(), .sibiling(), .nextAll(), nextUntil(), .prevAll(), .prevUntil()
+</pre>
+</p>
+
+<h2>유틸리티 함수</h2>
+
+<p>
+<pre class="brush:js">
+$.trim()
+$.each();
+$.inArray()
+$.extend()
+$.proxy()
+</pre>
+Type 테스팅
+
+<pre class="brush:js">
+$.isArray([]);
+$.isFunction(function() {});
+$.isNumeric(3.14);
+$.type( true); //"boolean"
+$.type(3);
+$.type("test");
+$.type (function() });
+</pre>
+</p>
+
+<h2>Iterating over jQUery and no-jQuery Objects</h2>
+
+<p>
+<h3>$.each()</h3>
+$.each() 는 for 나 for-in 의 기능
+
+<h3>.each</h3>
+.each() - jQuery collection 에 대한 iteration
+
+그러나 무조건 each 를 쓰지 말자.
+<pre class="brush:js">
+$( "li").each( function(index, el) {
+    $( el ).adClass( "newClass" );
+});
+</pre>
+위 코드는 다음과 같이 쓰는게 바람직 
+<pre class="brush:js">
+$( "li" ).addClass( "newClass" );
+</pre>
+</p>
+
+<p>
+다만 개별 element 에 대한 getter 를 쓸때는 each 를 통해 개별적으로 돌아야 함.
+그렇지 않으면 첫번째 element 에 대한 결과만 반환. (예외 .text() 는 concat 된 문자열 반환)
+
+<pre class="brush:js">
+$( "input" ).val( $(this).val() + "%" );//는 동작하지 않음
+$( "input" ).each( function( i, el ) {
+    var elem = $( el );
+    elem.val( elem.val() + "%");
+});
+</pre>
+</p>
+
+<p>
+setter 는 각 element 를 인자로 받는 함수를 callback으로 지정할 수 있다.
+
+그래서 다음 둘은 동일하다.
+
+<pre class="brush:js">
+$( "input" ).each( function( i, el ) {
+	var elem = $( el );
+	elem.val( elem.val() + "%" );
+});
+</pre>
+<pre class="brush:js">
+$( "input" ).val(function( index, value ) {
+	return value + "%";
+});
+</pre>
+</p>
+이런 암묵적인 iteration 과 관련하여 기억할만한 용은 children(), .parent() 와 같은 traverse 메소드들은 collection 에 있는 각 element 에 대해 작용하여 통합된 children, 혹은 parent 컬렉션을 반환한다는 점이다.
+<p>
+
+<h3>.map</h3>
+
+jQuery selector 에 기반하여 array 나 concat 된 문자열을 생성하기에는 each 보다는 map 이 적합하다.
+
+<pre class="brush:js">
+var newArr = [];
+$( "li" ).each( function() {
+	newArr.push( this.id );
+});
+</pre>
+</p>
+<p>
+
+<pre class="brush:js">
+$( "li" ).map( function(index, element) {
+	return this.id;
+}).get();
+</pre>
+
+문자열의 경우는 get() 후에 join 을 해주면 됨.
+</p>
+<p>
+<h3>$.map</h3>
+
+일반 Array 에 적용한다. 그러나 .map() 과 달리 마지막에 get 을 호출해줄 필요가 없다.
+
+ECMAScript 5의 map() 과 매개변수 순서가 동일
+
+</p>
 </body>
 </html>

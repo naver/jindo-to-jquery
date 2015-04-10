@@ -52,12 +52,12 @@ var ArticleView = (function() {
 		var guideTpl = _.template(tplText);
 		var guideHtml = guideTpl({title : data.title, description : data.description || '', guideUrl : data.url });
 		var $article = $('article');
-
-		$article.addClass('readme');
-		//$('article').html(guideHtml);
 		var $guideContent = $(guideHtml);
 
-		$guideContent.filter('.content').load(data.url);
+		$article.addClass('readme');
+		$guideContent.filter('.content').load(data.url, function() {
+			SyntaxHighlighter.highlight();	//apply syntax highlighter
+		});
 		$article.html($guideContent);
 	}
 

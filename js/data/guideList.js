@@ -3,7 +3,7 @@ var GUIDES = [{
 	content : [
 		{title : '소개', url : 'html/guide.usage.html'},
 		{title : 'jQuery 기초튼튼', content : [
-			{title : '작동원리 기본', url : 'html/basic/guide.basic.how-jquery-works.html'},
+			{title : '작동방식 기본', url : 'html/basic/guide.basic.how-jquery-works.html'},
 			{title : '이벤트 기본', url : 'html/basic/guide.basic.event.html'},
 			{title : '이펙트 기본', url : 'html/basic/guide.basic.effect.html'},
 			{title : 'Ajax 기본', url : 'html/basic/guide.basic.ajax.html'},
