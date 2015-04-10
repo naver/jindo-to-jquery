@@ -93,7 +93,7 @@
 			} else {
 				var selected = ("guide" === this.settings.selected.type && aMenuItems[i].url === this.settings.selected.data.url) ? 'selected' : '';
 				contentHtml += 
-					'<a class="menu-item ' + selected + '" href="http://jindo.nhncorp.com/jindoTojquery/index.html?type=guide&param=' + aMenuItems[i].url + '">\
+					'<a class="menu-item ' + selected + '" href="index.html?type=guide&param=' + aMenuItems[i].url + '">\
 						' + aMenuItems[i].title + '\
 					</a>';					
 			}
