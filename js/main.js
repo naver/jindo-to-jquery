@@ -1,23 +1,4 @@
 (function() {
-	function changeUrl(htArticleData) {
-		var param = null;
-
-		if (htArticleData.type === 'guide') {
-			param = htArticleData.data;
-		} else if (htArticleData.type === 'api') {
-			var prop = htArticleData.data;
-			param = prop.className + '_' + prop.name;
-		} else {
-			return;
-		}
-		
-		//var $link = $("<a href=\""+'index.html?type=' + htArticleData.type + '&param=' + param+"\" ></a>");
-		//$("body").append($link);
-		//$link.click();
-		//location.href = 'index.html?type=' + htArticleData.type + '&param=' + param;
-		return 'index.html?type=' + htArticleData.type + '&param=' + param;
-	}
-
 	function getPropInfo(isMethod, sClassName, sPropName) {
 		for (var i = 0, len = JINDO_APIS.length; i < len; i++) {
 			if (JINDO_APIS[i].className.indexOf(sClassName) != -1) {
@@ -47,18 +28,7 @@
 	 */
 	function getDefaultTitle() {
 		var $selected = $('.selected');
-		//var len = $selected.length;
-
 		var title = $selected.last().text().trim();
-		// $selected.each(function(i) {
-		// 	if (i != 0) {
-		// 		title += $(this).text().trim();
-
-		// 		if (i != len - 1) {
-		// 			title += ' - '
-		// 		}
-		// 	}
-		// });
 
 		return title;
 	}
@@ -105,13 +75,11 @@
 		/**
 		 * 메뉴 초기화
 		 */
-		$(".accordian").accordian({
+		$(".accordian").accordianMenu({
 			apiData: JINDO_APIS,
 			guideData : GUIDES,
 			selected : info
-		}).on('showArticle', function(e, data) {
-			console.log('showArticle event triggered!');
-		});;
+		});
 		
 		/**
 		 * 문서 갱신 - 현재 url 을 파싱하여 그에 맞는 문서를 노출한다.

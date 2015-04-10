@@ -16,18 +16,18 @@
 
 }(function($, underscore) {
     'use strict';
-    var Accordian = window.Accordian || {};
+    var AccordianMenu = window.AccordianMenu || {};
     var LOCALSTRG_MENU_SCROLL_TOP = 'menuScrollTop';
     var EXPAND_BUTTON_HTML = '\
     						<div class="icon">\
 								<svg viewBox="0 0 24 24" height="100%" width="100%" preserveAspectRatio="xMidYMid meet" fit="" style="pointer-events: none;"><g><path d="M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z"></path></g></svg>\
 							</div>';
 
-    Accordian = (function() {
+    AccordianMenu = (function() {
 
         var instanceUid = 0;
 
-        function Accordian(element, settings) {
+        function AccordianMenu(element, settings) {
             var _ = this;
 			
             _.initials = {
@@ -71,11 +71,11 @@
 
         }
 
-        return Accordian;
+        return AccordianMenu;
 
     }());
 	
-	Accordian.prototype.buildContent = function(aMenuItems) {
+	AccordianMenu.prototype.buildContent = function(aMenuItems) {
 		var contentHtml = '';
 		for (var i = 0, l = aMenuItems.length; i < l; i++) {
 			if (aMenuItems[i].content) {
@@ -141,7 +141,7 @@
 		return methodHtml;
 	}
 
-    Accordian.prototype.buildOut = function() {
+    AccordianMenu.prototype.buildOut = function() {
 		//_.apiData 를 이용해서 wrapper class 영역의 html 을 채워준다.
 		var _ = this;
 		//console.log(_.apiData);
@@ -175,7 +175,7 @@
 		$el.parents('.accordian-item').children('.menu-item').addClass('selected');
     };
 
-    Accordian.prototype.init = function() {
+    AccordianMenu.prototype.init = function() {
         var _ = this;
 
         if (!$(_.$accordian).hasClass('accordian-initialized')) {
@@ -187,7 +187,7 @@
         
     };
     
-    Accordian.prototype.clickHandler = function(e) {
+    AccordianMenu.prototype.clickHandler = function(e) {
 	    var _ = this;
 	    var $accordianHeader = $(e.target);
 	    var $accordianContent = $accordianHeader.next();
@@ -222,7 +222,7 @@
 		localStorage.setItem(LOCALSTRG_MENU_SCROLL_TOP, nMenuScrollTop);
 	};
 	
-    Accordian.prototype.initializeEvents = function() {
+    AccordianMenu.prototype.initializeEvents = function() {
         var _ = this;
 		_.$accordianHeaders.on('click.accordian', _.clickHandler);
 		_.$menuItems.on('click.accordian', function(e){
@@ -272,7 +272,7 @@
 		}.bind(this));
     };
 
-    $.fn.accordian = function() {
+    $.fn.accordianMenu = function() {
         var _ = this,
             opt = arguments[0],
             args = Array.prototype.slice.call(arguments, 1),
@@ -281,7 +281,7 @@
             ret;
         for (i; i < l; i++) {
             if (typeof opt == 'object' || typeof opt == 'undefined')
-                _[i].accordian = new Accordian(_[i], opt);
+                _[i].accordian = new AccordianMenu(_[i], opt);
             else
                 ret = _[i].accordian[opt].apply(_[i].accordian, args);
             if (typeof ret != 'undefined') return ret;
