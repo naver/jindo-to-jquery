@@ -878,10 +878,20 @@ var JINDO_APIS = [{
 		"jqueryCodeUrl": "mekilan",
 		"jindoCodeUrl": "rinaci"
 	}, {
+		"name": "reset()",
+		"description": "reset() 메서드는 <form> 요소를 초기화(reset)한다. 파라미터로 함수를 입력할 수 있으며 해당 함수가 true 값을 반환하면 <form> 요소를 초기화한다.",
+		"jqueryCodeUrl": "mewexo",
+		"jindoCodeUrl": "zefire"
+	}, {
 		"name": "serialize()",
 		"description": "<form> 요소의 특정 또는 전체 입력 요소를 쿼리스트링(Query String) 형태로 반환한다.",
 		"jqueryCodeUrl": "nunube",
 		"jindoCodeUrl": "duyaru"
+	}, {
+		"name": "submit()",
+		"description": "submit() 메서드는 <form> 요소의 데이터를 제출(submit)한다. submit() 메서드에 파라미터를 지정하면 <form> 요소의 target 속성을 무시하고 지정한 전송 대상으로 정보를 전송한다. 이때 기존 <form> 요소의 target 속성을 변경하지 않는다. 또한 파라미터로 함수를 입력할 수 있으며 해당 함수가 true 값을 반환하면 데이터를 제출한다. 이 함수를 사용하여 데이터를 전송하기 전에 검증할 수 있다.",
+		"jqueryCodeUrl": "bodoji",
+		"jindoCodeUrl": "piwana"
 	}, {
 		"name": "value()",
 		"description": "<form> 요소의 값을 얻거나 설정한다.",
