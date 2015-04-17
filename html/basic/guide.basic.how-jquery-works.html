@@ -6,11 +6,11 @@
 
 <pre class="brush: js">$("h1").remove()</pre>
 <p>
-	위와 같이 jQuery selection 에 대해 호출된 메서드는 $.fn 라는 네임스페이스에 속한다. 그리고 자동으로 이 selection (this) 로 파라미터로 받거나 반환값으로 사용한다.
+	위와 같이 jQuery selection 에 대해 호출된 메서드는 $.fn 라는 네임스페이스에 속한다. 그리고 자동으로 이 selection (this) 을 파라미터로 받거나 반환값으로 사용한다.
 </p>
 <pre class="brush:js">$.ajax()</pre>
 <p>
-	위와 같이 $ 네임스페이스에 속한 메소드들은 selection 을 대상으로 하는 메소드가 아닌 유틸리티성 메소드를 의미한다. 자동으로 어떤 파라미터도 넘기지 않으며 반환값도 다양하다.
+	위와 같이 $ 네임스페이스에 속한 메소드들은 selection 을 대상으로 하는 메소드가 아닌 유틸리티성 메소드를 의미한다.
 </p>
 
 <h2>$( document ).ready()</h2>
@@ -36,7 +36,7 @@ $를 사용하는 다른 라이브러리와의 충돌을 피하고자 하는 경
 </p>
 
 <p>
-1) Create a New Alias
+<h3>1) 새로운 Namespace(Alias)사용</h3>
 
 <pre class="brush:js">
 var $j = jQuery.noConflict();
@@ -46,7 +46,7 @@ $j( document ).ready( function() {
 </pre>
 </p>
 <p>
-2) 즉시 실행함수 형태
+<h3>2) 즉시 실행함수 형태로 실행</h3>
 <pre class="brush:js">
 jQuery.noConflict();
 (function( $ ) {
@@ -56,7 +56,7 @@ jQuery.noConflict();
 </p>
 
 <p>
-2) $ 를 매개변수로 지정 - Ideal Solution
+<h3>3) $ 를 매개변수로 지정 </h3>
 
 <pre class="brush:js">jQuery.noConflict();
 jQuery( document ).ready((function( $ ) {
@@ -68,18 +68,18 @@ jQuery( document ).ready((function( $ ) {
 <h2>jQuery Object</h2>
 <h3>반환값</h3>
 <p>
-jQuery 의 반환 값은 array 형태의 collection 을 반환한다. Element 의 조작을 위한 여러 편의 인터페이스를 제공한다.
+jQuery 는 array 형태의 collection (jQuery Object) 을 반환한다. 이 jQuery Object 는 Element 의 조작을 위한 여러 편의 인터페이스를 제공한다.
 </p>
 
 <p>
-첫 번째 jQuery object 반환
+첫 번째 jQuery object 반환하는 예제
 <pre class="brush:js">
 $( "h1" ).eq(0);
 </pre>
 </p>
 
 <p>
-<xmp>첫 번째 <h1> element 반환</xmp>
+첫 번째 &lth1&gt element 반환하는 예제
 <pre class="brush:js">
 $( "h1" ).get( 0 );
 $( "h1" )[ 0 ];
@@ -89,13 +89,13 @@ $( "h1" )[ 0 ];
 <h3>Wrapping 객체의 유일성</h3>
 
 <p>
-1)jQuery로 래핑된 Object 는 unique 하다.
+<h4>jQuery로 래핑된 Object 는 유일하다.</h4>
 <pre class="brush:js">
 $( "#logo") !== $("#logo")
 </pre>
 </p>
 <p>
-2)하지만 element 는 아니다.
+<h4>하지만 같은 Element 를 참조할 수 있다.</h4>
 <pre class="brush:js">
 var logo1 = $( "#logo" ).get( 0 );
 var logo2 = $( "#logo" ).get( 0 );
@@ -146,6 +146,7 @@ jQuery Object 를 가지고 element 를 create 하거나 select 하는 경우에
 <h2>유틸리티 함수</h2>
 
 <p>
+<h3>일반</h3>	
 <pre class="brush:js">
 $.trim()
 $.each();
@@ -153,7 +154,7 @@ $.inArray()
 $.extend()
 $.proxy()
 </pre>
-Type 테스팅
+<h3>Type 테스팅</h3>
 
 <pre class="brush:js">
 $.isArray([]);
@@ -170,10 +171,10 @@ $.type (function() });
 
 <p>
 <h3>$.each()</h3>
-$.each() 는 for 나 for-in 의 기능
+$.each() 는 for 나 for-in 의 기능을 하는 유틸리티 함수
 
 <h3>.each</h3>
-.each() - jQuery collection 에 대한 iteration
+.each() - jQuery collection 에 대한 iteration<br/><br/>
 
 그러나 무조건 each 를 쓰지 말자.
 <pre class="brush:js">
@@ -188,11 +189,18 @@ $( "li" ).addClass( "newClass" );
 </p>
 
 <p>
-다만 개별 element 에 대한 getter 를 쓸때는 each 를 통해 개별적으로 돌아야 함.
-그렇지 않으면 첫번째 element 에 대한 결과만 반환. (예외 .text() 는 concat 된 문자열 반환)
+
+다만 개별 element 에 대한 getter 를 쓸때는 each 를 통해 개별적으로 돌아야한다.<br/>
+그렇지 않으면 첫번째 element 에 대한 결과만 반환한다. (예외 .text() 는 concat 된 문자열 반환)
 
 <pre class="brush:js">
-$( "input" ).val( $(this).val() + "%" );//는 동작하지 않음
+/**
+* 여러 input 이 있을 때
+*/
+// Incorrect! 아래 코드는 첫번째 input value 값만 설정한다.
+$( "input" ).val( $(this).val() + "%" );
+
+// Correct! 개별 element 를 순회하며 값을 반환해주어야 한다.
 $( "input" ).each( function( i, el ) {
     var elem = $( el );
     elem.val( elem.val() + "%");
@@ -201,23 +209,24 @@ $( "input" ).each( function( i, el ) {
 </p>
 
 <p>
-setter 는 각 element 를 인자로 받는 함수를 callback으로 지정할 수 있다.
+단 setter 는 callback 을 지정하여 모든 개별 element 를 순회하며 값 설정을 할 수 있다.<br/><br/>
 
-그래서 다음 둘은 동일하다.
-
+그래서 다음 둘은 동일하다.<br>
+1) each 로 모든 개별 element 를 순회하며 값을 설정하는 예
 <pre class="brush:js">
 $( "input" ).each( function( i, el ) {
 	var elem = $( el );
 	elem.val( elem.val() + "%" );
 });
 </pre>
+2) setter 함수에 callback 을 지정하여 모든 개별 element 에 값을 설정하는 예제
 <pre class="brush:js">
 $( "input" ).val(function( index, value ) {
 	return value + "%";
 });
 </pre>
 </p>
-이런 암묵적인 iteration 과 관련하여 기억할만한 용은 children(), .parent() 와 같은 traverse 메소드들은 collection 에 있는 각 element 에 대해 작용하여 통합된 children, 혹은 parent 컬렉션을 반환한다는 점이다.
+이런 암묵적인 iteration 과 관련하여 기억할만한 용은 children(), .parent() 와 같은 traverse 메소드들은 collection 에 있는 각 element 에 적용되어 통합된 children 혹은 parent 컬렉션을 반환한다는 점이다.
 <p>
 
 <h3>.map</h3>
@@ -245,9 +254,35 @@ $( "li" ).map( function(index, element) {
 <h3>$.map</h3>
 
 일반 Array 에 적용한다. 그러나 .map() 과 달리 마지막에 get 을 호출해줄 필요가 없다.
-
-ECMAScript 5의 map() 과 매개변수 순서가 동일
-
+<pre class="brush:js">
+/*
+<li id="a"></li>
+<li id="b"></li>
+<li id="c"></li>
+ */
+ 
+var arr = [{
+    id: "a",
+    tagName: "li"
+}, {
+    id: "b",
+    tagName: "li"
+}, {
+    id: "c",
+    tagName: "li"
+}];
+ 
+// Returns [ "a", "b", "c" ]
+$( "li" ).map( function( index, element ) {
+    return element.id;
+}).get();
+ 
+// Also returns [ "a", "b", "c" ]
+// Note that the value comes first with $.map
+$.map( arr, function( value, index ) {
+    return value.id;
+});
+</pre>
 </p>
 </body>
 </html>

@@ -1,5 +1,134 @@
 <html>
 <body>
-	준비 중입니다.
+<h2>﻿Append Outside of Loops</h2>
+
+아래와 같이 loop 안에서 매번 HTML 을 append 하지 말아라. 매번 DOM 조작 비용이 발생하기 때문이다.
+<pre class="brush:js">
+$.each( myArray, function( i, item ) {
+ 
+    var newListItem = "<li>" + item + "</li>";
+ 
+    $( "#ballers" ).append( newListItem );
+ 
+});
+</pre>
+
+loop 작업이 끝난 후 append 한다.
+
+<h2> Cache Length During Loops</h2>
+for 문에서 길이 값은 미리 변수로 빼서 처리하라.
+<pre class="brush:js">
+var myLength = myArray.length;
+ 
+for ( var i = 0; i < myLength; i++ ) {
+ 
+    // do stuff
+ 
+}
+</pre>
+
+<h2>Element 뺐다가 다시 넣어야 하는 상황에서는 .detach()를 써라.</h2>
+DOM 만 제거되고 해당 element 에 대한 jQuery 데이터는 모두 유지 되기 때문에 element 를 뺐다가 나중에 다시 DOM 에 넣는 상황에서 더 유리하다.
+
+<pre class="brush:js">
+var table = $( "#myTable" );
+var parent = table.parent();
+ 
+table.detach();
+ 
+// ... add lots and lots of rows to table
+ 
+parent.append( table );//TODO: 자식들도 유지되는 것 같은데 확인해 보기
+</pre>
+
+<h2>4. Don't Act on Absent Elements</h2>
+jQuery Object 가 없다고 하더라도 별 애러없이 그냥 지나가므로 검증하는 건 너의 책임.length를 체크한 후 실행하라. selection 에 아무런 element 가 없으면  overhead 가 발생한다.
+
+<pre class="brush:js">
+// Bad: This runs three functions before it
+// realizes there's nothing in the selection
+$( "#nosuchthing" ).slideUp();
+ 
+// Better:
+var elem = $( "#nosuchthing" );
+ 
+if ( elem.length ) {
+ 
+    elem.slideUp();
+ 
+}
+ 
+// Best: Add a doOnce plugin.
+jQuery.fn.doOnce = function( func ) {
+ 
+    this.length && func.apply( this );
+ 
+    return this;
+ 
+}
+ 
+$( "li.cartitems" ).doOnce(function() { 
+ 
+    // make it ajax! \o/ 
+ 
+});
+</pre>
+
+<h2>5. Optimize Selector</h2>
+사람들이 간과하고 있음. Browser 단에서 많은 처리하도록 바뀌고 있지만 아직 중요함.
+<h3>ID 기반이 최고</h3>
+ Browser native 함수인 getElementById 를 타게 하는 방식이 최고. 여러개 섞으면 Sizzel selelctor 엔진을 거치므로 성능이 좀 떨어짐. 
+
+<pre class="brush:js">
+// Fast:
+$( "#container div.robotarm" );
+ 
+// Super-fast:
+$( "#container" ).find( "div.robotarm" );
+</pre>
+
+<h3>Specificity</h3>
+오른쪽에 좀더 상세한 selector 를 두어라.
+<pre class="brush:js">
+// Unoptimized:
+$( "div.data .gonzalez" );
+ 
+// Optimized:
+$( ".data td.gonzalez" );
+</pre>
+<h3> Avoid Excessive Specificity</h3>
+
+과도한 selector 는 피하라.
+단순하게 구성할 수록 Traverse 해야하는 layer 가 줄어들므로 속도가 증가
+<pre class="brush:js">
+$( ".data table.attendees td.gonzalez" );
+ 
+// Better: Drop the middle if possible.
+$( ".data td.gonzalez" );
+</pre>
+
+
+<h3>Avoid the Universal Selector</h3>
+<pre class="brush:js">
+$( ".buttons > *" ); // Extremely expensive.
+$( ".buttons" ).children(); // Much better.
+ 
+$( ".category :radio" ); // Implied universal selection.
+$( ".category *:radio" ); // Same thing, explicit now.
+$( ".category input:radio" ); // Much better.
+</pre>
+<h2>6. Use Stylesheets for Changing CSS on Many Elements</h2>
+
+css 를 통해서 20 개 이상의 element 의 속성을 바꾸려고 하는 경우 대신 style tag 적용하는 것이 60% 가까이 빠르다.
+<pre class="brush:js">
+// Fine for up to 20 elements, slow after that:
+$( "a.swedberg" ).css( "color", "#0769ad" );
+ 
+// Much faster:
+$( "<style type=\"text/css\">a.swedberg { color: #0769ad }</style>")
+    .appendTo( "head" );
+</pre>
+<h2>7. Don't Treat jQuery as a Black Box.</h2>
+https://code.jquery.com/jquery/ 링크를 보고 소스 코드를 자주 참조해라 
 </body>
 </html>
