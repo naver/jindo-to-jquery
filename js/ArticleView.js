@@ -47,6 +47,10 @@ var ArticleView = (function() {
 		return "http://api.jquery.com/";
 	}
 
+	function _getGuideExtension(sPath) {
+		return sPath.match(/.*\.(\w*)/)[1];
+	}
+
 	function _updateGuide(data) {
 		var tplText = $("#guide-template").text();
 		var guideTpl = _.template(tplText);
@@ -54,10 +58,30 @@ var ArticleView = (function() {
 		var $article = $('article');
 		var $guideContent = $(guideHtml);
 
+		var type = _getGuideExtension(data.url) || "";
 		$article.addClass('readme');
-		$guideContent.filter('.content').load(data.url, function() {
-			SyntaxHighlighter.highlight();	//apply syntax highlighter
-		});
+
+		if ( type === "html" ) {
+			$guideContent.filter('.content').load(data.url, function() {
+				$('pre code').each(function(i, block) {
+    				hljs.highlightBlock(block);
+  				});
+			});
+		} else if ( type === "md" ) {
+			//TODO: 함수로 빼자
+			var mdOption = {
+				'highlight' : function( code, lang ) {
+					if(lang) {
+						return hljs.highlight(lang.toLowerCase(), code).value;
+					}
+					return;
+				}
+			}
+
+			$.get( data.url, function( markdown ) {
+				$guideContent.filter( '.content' ).html( marked( markdown, mdOption ) );
+			});
+		}
 		$article.html($guideContent);
 	}
 

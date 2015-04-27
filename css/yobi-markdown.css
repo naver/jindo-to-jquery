@@ -1,0 +1,124 @@
+.markdown-wrap {
+  font-size: 14px;
+  clear: both;
+  overflow: auto;
+  /*
+  img{
+    max-width:100%;
+    margin:10px 0; padding: 10px;
+    border:1px solid rgba(0,0,0,0.1);
+    .box-shadow(2px 2px 5px rgba(0,0,0,0.15));
+    .box-sizing(border-box);
+  }*/
+}
+.markdown-wrap a {
+  color: #4183c4;
+  text-decoration: none;
+}
+.markdown-wrap a:hover {
+  color: #4183c4;
+  text-decoration: underline;
+}
+.markdown-wrap a:active {
+  color: #4183c4;
+  text-decoration: none;
+}
+.markdown-wrap h1 {
+  margin: 1em 0 15px;
+  font-size: 2.5em;
+}
+.markdown-wrap h2 {
+  margin: 1em 0 15px;
+  border-bottom: 1px solid #bbb;
+  font-size: 2.0em;
+}
+.markdown-wrap h3 {
+  font-size: 1.5em;
+}
+.markdown-wrap h4 {
+  font-size: 1em;
+}
+.markdown-wrap hr {
+  height: 1px;
+  margin: 10px 0;
+  border: 0;
+  color: #ccc;
+  background-color: #ccc;
+}
+.markdown-wrap p {
+  margin: 15px 0;
+}
+.markdown-wrap blockquote p {
+  font-size: 1em;
+}
+.markdown-wrap code {
+  padding: 0px 5px;
+  border: 1px solid #ddd;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+  font-family: "Menlo", "Consolas", "Monaco", "Ubuntu Mono", "source-code-pro", monospace;
+}
+.markdown-wrap code .title {
+  font-size: inherit;
+}
+.markdown-wrap blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+.markdown-wrap ul {
+  padding: 0px 20px;
+  line-height: 20px;
+  list-style: disc;
+}
+.markdown-wrap li {
+  line-height: 24px;
+}
+.markdown-wrap ul ul,
+.markdown-wrap ol ul {
+  list-style: circle;
+}
+.markdown-wrap ul ul ul,
+.markdown-wrap ol ul ul,
+.markdown-wrap ol ol ul,
+.markdown-wrap ul ol ul {
+  list-style: square;
+}
+.markdown-wrap ol {
+  padding: 0px 20px;
+  line-height: 20px;
+  list-style: decimal;
+}
+.markdown-wrap pre {
+  background-color: #f8f8f8;
+  padding: 10px;
+  margin: 10px 0;
+}
+.markdown-wrap pre code {
+  marign: 0;
+  padding: 0;
+  border: none;
+}
+.markdown-wrap table {
+  border-collapse: collapse;
+  margin: 15px 15px;
+}
+.markdown-wrap table th {
+  padding: 5px;
+  border: 1px solid #dcddde;
+  background-color: #f7f7f7;
+}
+.markdown-wrap table td {
+  padding: 5px;
+  border: 1px solid #dcddde;
+}
+.markdown-wrap.markdown-before {
+  visibility: hidden;
+}
+.markdown-wrap .popover {
+  max-width: 400px;
+}
+.markdown-wrap .popover-title {
+  font-size: 14px;
+  font-weight: bold;
+}
