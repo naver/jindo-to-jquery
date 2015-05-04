@@ -22,6 +22,11 @@ var JINDO_APIS = [{
 		"jqueryCodeUrl": "gulowo",
 		"jindoCodeUrl": "gubule"
 	}, {
+		"name": "$$.debug()",
+		"description": "debug() 메서드는 $$() 함수(cssquery)를 사용할 때 성능을 측정하기 위한 기능을 제공하는 함수이다. 파라미터로 입력한 콜백 함수를 사용하여 성능을 측정한다.",
+		"jqueryCodeUrl": "leyako",
+		"jindoCodeUrl": "wumeli"
+	}, {
 		"name": "$$.getSingle()",
 		"description": "CSS 선택자를 사용에서 조건을 만족하는 첫 번째 요소를 가져온다. ",
 		"jindoCodeUrl": "gateji",
@@ -41,6 +46,11 @@ var JINDO_APIS = [{
 		"description": "$$() 함수(cssquery)를 사용할 때 캐시를 사용할 것인지 설정한다.",
 		"jindoCodeUrl": "loyeja",
 		"jqueryCodeUrl": "taravu"
+	}, {
+		"name": "$$.xpath()",
+		"description": "xpath() 메서드는 XPath 문법을 만족하는 요소를 가져온다. 지원하는 문법이 제한적이므로 특수한 경우에만 사용할 것을 권장한다.",
+		"jqueryCodeUrl": "liduniy",
+		"jindoCodeUrl": "likube"
 	}]
 }, {
 	"className": "$A",
@@ -151,6 +161,11 @@ var JINDO_APIS = [{
 		"jindoCodeUrl": "luvuna",
 		"jqueryCodeUrl": "jegamu"
 	}, {
+		"name": "sort()",
+		"description": "sort() 메서드는 배열 오름차순으로 정렬한다. 파라메터를 통해 원하는 방법으로 정렬할 수 있다.",
+		"jqueryCodeUrl": "seyos",
+		"jindoCodeUrl": "bulozu"
+	}, {
 		"name": "splice()",
 		"description": "내부 배열의 일부분을 삭제한다.",
 		"jindoCodeUrl": "nofije",
@@ -199,6 +214,16 @@ var JINDO_APIS = [{
 	"className": "$Ajax",
 	"property": [],
 	"methods": [{
+		"name": "abort()",
+		"description": "abort() 메서드는 서버로 전송한 Ajax 요청을 취소한다. Ajax 요청의 응답 시간이 길거나 강제로 Ajax 요청을 취소할 경우 사용한다.",
+		"jqueryCodeUrl": "yokike",
+		"jindoCodeUrl": "sadeba"
+	}, {
+		"name": "header()",
+		"description": "header() 메서드는 Ajax 요청에서 사용할 HTTP 요청 헤더를 가져오거나 혹은 설정한다.",
+		"jqueryCodeUrl": "raxisa",
+		"jindoCodeUrl": "vunayu"
+	}, {
 		"name": "isIdle()",
 		"description": "$Ajax() 객체가 현재 요청 대기 상태인지 확인한다.",
 		"jqueryCodeUrl": "qojus",
@@ -242,6 +267,11 @@ var JINDO_APIS = [{
 	"className": "$Ajax.Response",
 	"property": [],
 	"methods": [{
+		"name": "header()",
+		"description": "header() 메서드는 응답 헤더를 가져온다.",
+		"jqueryCodeUrl": "dejego",
+		"jindoCodeUrl": "meloco"
+	},{
 		"name": "json()",
 		"description": "응답을 JSON 객체로 반환한다.",
 		"jqueryCodeUrl": "qaxuni",
@@ -268,12 +298,41 @@ var JINDO_APIS = [{
 		"jqueryCodeUrl": "roninu"
 	}]
 }, {
+	"className": "$Ajax.SWFRequest",
+	"property": [],
+	"methods": [{
+		"name": "activeFlash()",
+		"description": "플래시 객체 로딩 여부를 저장한 변수. 로딩된 경우 true를 반환하고 로딩되지 않은 경우 false를 반환한다. 플래시 객체가 로딩되었는지 확인할 때 사용할 수 있다.",
+		"jqueryCodeUrl": "bowar",
+		"jindoCodeUrl": "qoqiki"
+	}, {
+		"name": "onload()",
+		"description": "flash가 정상적으로 load 완료된 후 실행되는 함수.",
+		"jindoCodeUrl": "qijobo",
+		"jqueryCodeUrl": "patalu"
+	}, {
+		"name": "write()",
+		"description": "write() 메서드는 플래시 객체를 초기화하는 메서드로서 write() 메서드를 호출하면 통신을 위한 플래시 객체를 문서 내에 추가한다. Ajax 요청 타입이 flash이면 플래시 객체를 통해 통신한다. 따라서 jindo.$Ajax() 객체의 request 메서드가 호출되기 전에 write() 메서드를 반드시 한 번 실행해야 하며, 요소에 작성되어야 한다. 두 번 이상 실행해도 문제가 발생한다.",
+		"jindoCodeUrl": "gujupe",
+		"jqueryCodeUrl": "qagixu"
+	}]
+} {
 	"className": "$Class",
 	"property": [{
 		"name": "$super",
 		"description": "부모 클래스의 메서드에 접근할 때 사용한다",
 		"jqueryCodeUrl": "bukoma",
 		"jindoCodeUrl": "purifi"
+	}, {
+		"name": "$autoBind",
+		"description": "$autoBind속성에 true을 등록하면 _가 들어간 메서드는 자동으로 bind된다.",
+		"jqueryCodeUrl": "ruzuwe",
+		"jindoCodeUrl": "nuvohe"
+	}, {
+		"name": "$static",
+		"description": "$static으로 등록된 메서드는 $Class을 인스턴서화 하지 않아도 사용할 수 있다.",
+		"jqueryCodeUrl": "halolu",
+		"jindoCodeUrl": "lebade"
 	}],
 	"methods": [{
 		"name": "extend()",
@@ -364,10 +423,20 @@ var JINDO_APIS = [{
 		"jindoCodeUrl": "bosuqa",
 		"jqueryCodeUrl": "lehuse"
 	}, {
+		"name": "name()",
+		"description": "name() 메서드는 names 속성에 정의된 달, 요일, 오전/오후를 표시하는 문자열의 값을 가져오거나 설정한다.",
+		"jindoCodeUrl": "puleni",
+		"jqueryCodeUrl": "joruyu"
+	}, {
 		"name": "now()",
 		"description": "현재 시간을 밀리 초(millisecond) 단위의 정수로 리턴한다.",
 		"jqueryCodeUrl": "liheco",
 		"jindoCodeUrl": "kaduju"
+	}, {
+		"name": "parse()",
+		"description": "parse() 메서드는 인수로 지정한 문자열을 파싱하여 jindo.$Date() 객체를 생성한다.",
+		"jqueryCodeUrl": "tequpi",
+		"jindoCodeUrl": "pixave"
 	}, {
 		"name": "seconds()",
 		"description": "$Date() 객체가 저장하고 있는 시각의 초(second)를 가져오거나 지정한 값으로 설정한다.",
@@ -393,6 +462,16 @@ var JINDO_APIS = [{
 		"jqueryCodeUrl": "xudubi",
 		"jindoCodeUrl": "tijaze"
 	}, {
+		"name": "query()",
+		"description": "문서를 대상으로 지정한 선택자를 만족시키는 첫 번째 요소를 반환한다. 만족하는 요소가 존재하지 않으면 null을 반환한다. $$.getSingle 함수에서 elBaseElement 파라미터에 문서를 지정한 것과 같은 의미이다.",
+		"jqueryCodeUrl": "cepizo",
+		"jindoCodeUrl": "hihije"
+	}, {
+		"name": "queryAll()",
+		"description": "문서를 대상으로 지정한 선택자를 만족시키는 요소의 배열을 반환한다. 만족하는 요소가 존재하지 않으면 빈 배열을 반환한다. $$() 함수에서 elBaseElement 파라미터에 문서를 지정한 것과 같은 의미이다.",
+		"jqueryCodeUrl": "xifewu",
+		"jindoCodeUrl": "sexoxu"
+	}, {
 		"name": "renderingMode()",
 		"description": "문서가 렌더링된 방식을 검사하여 반환한다.",
 		"jindoCodeUrl": "hibanu",
@@ -407,6 +486,11 @@ var JINDO_APIS = [{
 		"description": "문서의 가로 크기와 세로 크기 정보를 담은 객체를 반환한다.",
 		"jqueryCodeUrl": "ruqupo",
 		"jindoCodeUrl": "doguta"
+	}, {
+		"name": "xpathAll()",
+		"description": "문서를 대상으로 XPath 문법을 만족하는 요소를 가져온다. 지원하는 문법이 제한적이므로 특수한 경우에만 사용할 것을 권장한다. $$.xpath() 함수에서 elBaseElement 파라미터에 문서를 지정한 것과 같은 의미이다.",
+		"jqueryCodeUrl": "pijuqu",
+		"jindoCodeUrl": "keqite"
 	}]
 }, {
 	"className": "$Element",
@@ -477,15 +561,30 @@ var JINDO_APIS = [{
 		"jindoCodeUrl": "xalelo",
 		"jqueryCodeUrl": "wehiso"
 	}, {
+		"name": "clone()",
+		"description": "cloneNode와 같이 element을 복제하는 메서드이다.",
+		"jqueryCodeUrl": "luneda",
+		"jindoCodeUrl": "suviku"
+	}, {
 		"name": "css()",
 		"description": "HTML 요소의 CSS 속성 값을 가져오거나 설정한다.",
 		"jindoCodeUrl": "gufeyo",
 		"jqueryCodeUrl": "lumego"
 	}, {
+		"name": "cssClass()",
+		"description": "cssClass는 클래스를 확인 추가 삭제 할 수 있다.",
+		"jqueryCodeUrl": "yulimo",
+		"jindoCodeUrl": "butuwo"
+	}, {
 		"name": "data()",
 		"description": "dataset의 속성을 가져오거나 설정한다.",
 		"jqueryCodeUrl": "woboyu",
 		"jindoCodeUrl": "moreco"
+	}, {
+		"name": "detach()",
+		"description": "detach() 메서드는 엘리먼트에 등록된 이벤트 핸들러를 등록 해제한다.",
+		"jqueryCodeUrl": "kiwaji",
+		"jindoCodeUrl": "bibopo"
 	}, {
 		"name": "delegate()",
 		"description": "이벤트 위임(Event Deligation) 방식으로 이벤트를 처리한다.",
@@ -507,10 +606,25 @@ var JINDO_APIS = [{
 		"jindoCodeUrl": "pusuzo",
 		"jqueryCodeUrl": "zalotu"
 	}, {
+		"name": "evalScripts()",
+		"description": "evalScripts() 메서드는 문자열에 포함된 JavaScript 코드를 실행한다.<script> 태그가 포함된 문자열을 파라미터로 지정하면, <script> 안에 있는 내용을 파싱하여 eval() 메서드를 수행한다.",
+		"jqueryCodeUrl": "salare",
+		"jindoCodeUrl": "gixozo"
+	}, {
+		"name": "fireEvent()",
+		"description": "fireEvent() 메서드는 HTML 요소에 이벤트를 발생시킨다. 파라미터로 발생시킬 이벤트 종류와 이벤트 객체의 속성을 지정할 수 있다.",
+		"jqueryCodeUrl": "yoyuja",
+		"jindoCodeUrl": "keloda"
+	}, {
 		"name": "first()",
 		"description": "HTML 요소의 첫 번째 자식 노드에 해당하는 요소를 반환한다.",
 		"jqueryCodeUrl": "puwoxu",
 		"jindoCodeUrl": "giruqe"
+	}, {
+		"name": "hasClass()",
+		"description": "hasClass() 메서드는 HTML 요소에서 특정 클래스를 사용하고 있는지 확인한다.",
+		"jqueryCodeUrl": "cigeji",
+		"jindoCodeUrl": "huyizo"
 	}, {
 		"name": "hasEventListener()",
 		"description": "엘리먼트에 해당 이벤트가 할당되어 있는지를 확인.",
@@ -526,6 +640,11 @@ var JINDO_APIS = [{
 		"description": "HTML 요소가 화면에 보이지 않도록 display 속성을 none으로 변경한다.",
 		"jqueryCodeUrl": "cuyida",
 		"jindoCodeUrl": "fesudi"
+	}, {
+		"name": "hook()",
+		"description": "hook() 메서드는 개발자가 CSS를 만들면 진도에서 해당 CSS가 들어왔을 때 변경하여 사용한다.",
+		"jqueryCodeUrl": "boxisu",
+		"jindoCodeUrl": "fuyefi"
 	}, {
 		"name": "html()",
 		"description": "HTML 요소의 내부 HTML 코드(innerHTML)를 가져오거나 설정한다.",
@@ -561,6 +680,11 @@ var JINDO_APIS = [{
 		"description": "HTML 요소를 자신의 부모 요소에서 제거한다.",
 		"jindoCodeUrl": "honime",
 		"jqueryCodeUrl": "zixofu"
+	}, {
+		"name": "next()",
+		"description": "next() 메서드는 HTML 요소의 다음 형제 노드에 해당하는 요소를 검색한다.",
+		"jqueryCodeUrl": "yixase",
+		"jindoCodeUrl": "gupiho"
 	}, {
 		"name": "offset()",
 		"description": "HTML 요소의 위치를 가져오거나 설정한다.",
@@ -622,6 +746,11 @@ var JINDO_APIS = [{
 		"jqueryCodeUrl": "kimese",
 		"jindoCodeUrl": "soyija"
 	}, {
+		"name": "removeClass()",
+		"description": "removeClass() 메서드는 HTML 요소에서 특정 클래스를 제거한다.",
+		"jqueryCodeUrl": "faxese",
+		"jindoCodeUrl": "setepa"
+	}, {
 		"name": "replace()",
 		"description": "$Element() 객체 내부의 HTML 요소를 지정한 파라미터의 요소로 대체한다.",
 		"jindoCodeUrl": "vaboyi",
@@ -671,6 +800,11 @@ var JINDO_APIS = [{
 		"description": "HTML 요소의 너비를 가져오거나 설정한다.",
 		"jqueryCodeUrl": "posofe",
 		"jindoCodeUrl": "fiyaxo"
+	}, {
+		"name": "wrap()",
+		"description": "wrap() 메서드는 HTML 요소를 지정한 요소로 감싼다. HTML 요소는 지정한 요소의 마지막 자식 요소가 된다.",
+		"jqueryCodeUrl": "pefasi",
+		"jindoCodeUrl": "buxawe"
 	}, {
 		"name": "xpathAll()",
 		"description": "HTML 요소를 기준으로 XPath 문법을 만족하는 요소를 가져온다.",
@@ -794,12 +928,32 @@ var JINDO_APIS = [{
 }, {
 	"className": "$Event",
 	"property": [{
+		"name": "CANCEL_ALL",
+		"description": "CANCEL_ALL는 stop() 메서드에서 버블링과 기본 동작을 모두 중지시킬 때 사용되는 상수이다.",
+		"jqueryCodeUrl": "detuwu",
+		"jindoCodeUrl": "totosa"
+	}, {
+		"name": "CANCEL_BUBBLE",
+		"description": "CANCEL_BUBBLE는 stop() 메서드에서 버블링을 중지시킬 때 사용되는 상수이다.",
+		"jqueryCodeUrl": "salufu",
+		"jindoCodeUrl": "mapebav"
+	}, {
+		"name": "CANCEL_DEFAULT",
+		"description": "CANCEL_DEFAULT는 stop() 메서드에서 기본 동작을 중지시킬 때 사용되는 상수이다.",
+		"jqueryCodeUrl": "vemiho",
+		"jindoCodeUrl": "mapaha"
+	}, {
+		"name": "delegatedElement",
+		"description": "delegate를 사용할 경우 delegate된 엘리먼트",
+		"jqueryCodeUrl": "wajogi",
+		"jindoCodeUrl": "gubose"
+	}, {
 		"name": "currentElement",
 		"description": "이벤트가 정의된 엘리먼트",
 		"jqueryCodeUrl": "dicaqe",
 		"jindoCodeUrl": "jesixa"
 	}, {
-		"name": "element",
+		"name": "srcElement",
 		"description": "이벤트가 발생한 엘리먼트",
 		"jqueryCodeUrl": "cocofe",
 		"jindoCodeUrl": "qarado"
@@ -815,6 +969,16 @@ var JINDO_APIS = [{
 		"jindoCodeUrl": "savoci"
 	}],
 	"methods": [{
+		"name": "hook()",
+		"description": "hook() 메서드는 이벤트 명을 조회한다.",
+		"jqueryCodeUrl": "lavuna",
+		"jindoCodeUrl": "kijare"
+	}, {
+		"name": "key()",
+		"description": "key() 메서드는 키보드 이벤트 정보를 담고 있는 객체를 반환한다.",
+		"jqueryCodeUrl": "zociqo",
+		"jindoCodeUrl": "vureha"
+	}, {
 		"name": "mouse()",
 		"description": "마우스 이벤트 정보를 담고 있는 객체를 반환한다.",
 		"jqueryCodeUrl": "meveri",
@@ -829,11 +993,26 @@ var JINDO_APIS = [{
 		"description": "이벤트의 버블링과 기본 동작을 중지시킨다.",
 		"jqueryCodeUrl": "xadalo",
 		"jindoCodeUrl": "wedama"
+	}, {
+		"name": "stopBubble()",
+		"description": "stopBubble() 메서드는 이벤트의 버블링을 중지시킨다. stop() 메서드의 파라미터로 CANCEL_BUBBLE 값을 입력한 것과 같다.",
+		"jqueryCodeUrl": "pukolo",
+		"jindoCodeUrl": "wiviko"
+	}, {
+		"name": "stopDefault()",
+		"description": "stopDefault() 메서드는 이벤트의 기본 동작을 중지시킨다. stop() 메서드의 파라미터로 CANCEL_DEFAULT 값을 입력한 것과 같다.",
+		"jqueryCodeUrl": "macogo",
+		"jindoCodeUrl": "jehebo"
 	}]
 }, {
 	"className": "$Fn",
 	"property": [],
-	"methods": [{
+	"methods": [, {
+		"name": "attach()",
+		"description": "attach() 메서드는 함수를 특정 요소의 이벤트 핸들러로 등록한다.",
+		"jqueryCodeUrl": "nikaho",
+		"jindoCodeUrl": "papifi"
+	}{
 		"name": "bind()",
 		"description": "생성자가 지정한 객체의 메서드로 동작하도록 묶은 Function 객체를 반환한다.",
 		"jindoCodeUrl": "gojoge",
@@ -843,6 +1022,11 @@ var JINDO_APIS = [{
 		"description": "래핑한 함수를 지정한 시간 이후에 호출한다.",
 		"jqueryCodeUrl": "mukolo",
 		"jindoCodeUrl": "zenexu"
+	}, {
+		"name": "detach()",
+		"description": "detach() 메서드는 요소에 등록된 이벤트 핸들러를 등록 해제한다.",
+		"jqueryCodeUrl": "jarojo",
+		"jindoCodeUrl": "metiko"
 	}, {
 		"name": "repeat()",
 		"description": "setInterval() 메서드와 동일하다.",
@@ -1011,6 +1195,11 @@ var JINDO_APIS = [{
 		"jindoCodeUrl": "jasope",
 		"jqueryCodeUrl": "gofufi"
 	}, {
+		"name": "isElement()",
+		"description": "파라미터가 Element인지 확인하는 함수.",
+		"jqueryCodeUrl": "cevitu",
+		"jindoCodeUrl": "mebubo"
+	}, {
 		"name": "isFunction()",
 		"description": "파라메터가 Function인지 확인하는 함수.",
 		"jindoCodeUrl": "quneho",
@@ -1020,6 +1209,11 @@ var JINDO_APIS = [{
 		"description": "파라메터가 Hash인지 확인하는 함수.",
 		"jindoCodeUrl": "nefofo",
 		"jqueryCodeUrl": "canoju"
+	}, {
+		"name": "isNode()",
+		"description": "파라미터가 Node인지 확인하는 함수.",
+		"jqueryCodeUrl": "lafoxa",
+		"jindoCodeUrl": "lecose"
 	}, {
 		"name": "isNull()",
 		"description": "파라메터가 Null인지 확인하는 함수.",
@@ -1031,10 +1225,25 @@ var JINDO_APIS = [{
 		"jindoCodeUrl": "xapeda",
 		"jqueryCodeUrl": "musoqe"
 	}, {
+		"name": "isRegexp()",
+		"description": "파라미터가 Regexp인지 확인하는 함수.",
+		"jqueryCodeUrl": "pugomo",
+		"jindoCodeUrl": "qulaji"
+	}, {
 		"name": "isString()",
 		"description": "파라메터가 String인지 확인하는 함수.",
 		"jindoCodeUrl": "pesin",
 		"jqueryCodeUrl": "leyori"
+	}, {
+		"name": "isUndefined()",
+		"description": "파라미터가 Undefined인지 확인하는 함수.",
+		"jqueryCodeUrl": "capecu",
+		"jindoCodeUrl": "yigadi"
+	}, {
+		"name": "isWindow()",
+		"description": "파라미터가 Window인지 확인하는 함수.",
+		"jqueryCodeUrl": "nuyoke",
+		"jindoCodeUrl": "mofoja"
 	}, {
 		"name": "mixin()",
 		"description": "오브젝트를 mixin할 때 사용",
@@ -1138,6 +1347,16 @@ var JINDO_APIS = [{
 	"className": "$Template",
 	"property": [],
 	"methods": [{
+		"name": "addEngine()",
+		"description": "템플릿 문자열을 해석할 컴파일 엔진을 등록한다.",
+		"jqueryCodeUrl": "fozege",
+		"jindoCodeUrl": "vanekaz"
+	}, {
+		"name": "getEngine()",
+		"description": "$Template.addEngine 에서 등록한 컴파일 엔진을 반환한다.",
+		"jqueryCodeUrl": "lopaze",
+		"jindoCodeUrl": "vecumi"
+	}, {
 		"name": "process()",
 		"description": "템플릿을 해석하고 데이터를 적용하여 새로운 문자열을 생성한다.",
 		"jqueryCodeUrl": "judame",
