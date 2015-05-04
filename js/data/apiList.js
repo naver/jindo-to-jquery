@@ -1007,12 +1007,12 @@ var JINDO_APIS = [{
 }, {
 	"className": "$Fn",
 	"property": [],
-	"methods": [, {
+	"methods": [{
 		"name": "attach()",
 		"description": "attach() 메서드는 함수를 특정 요소의 이벤트 핸들러로 등록한다.",
 		"jqueryCodeUrl": "nikaho",
 		"jindoCodeUrl": "papifi"
-	}{
+	}, {
 		"name": "bind()",
 		"description": "생성자가 지정한 객체의 메서드로 동작하도록 묶은 Function 객체를 반환한다.",
 		"jindoCodeUrl": "gojoge",
