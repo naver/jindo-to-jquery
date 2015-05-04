@@ -316,7 +316,7 @@ var JINDO_APIS = [{
 		"jindoCodeUrl": "gujupe",
 		"jqueryCodeUrl": "qagixu"
 	}]
-} {
+}, {
 	"className": "$Class",
 	"property": [{
 		"name": "$super",
