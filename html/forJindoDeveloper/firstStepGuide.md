@@ -6,11 +6,14 @@ jQuery 는 $를 jQuery 라는 변수의 **별명(alias)**으로 사용한다. �
 
 ```html
 <script src="jindo.js"></script>
+<!-- 1. jQuery 를 로딩하면 jindo 에 정의된 $ 는 _$ 라는 내부 변수에 저장 -->
 <script src="jquery.js"></script>
 <script>
-$.noConflict();
+// 2. noConflict 를 호출하면 $ 가 jQuery 로 덮어써진 경우 이전 $ 값(_$)을 복구시킨다.
+jQuery.noConflict();
 
-// 이 다음부터 Jindo 코드를 작성해주면 된다.
+// 3. 그래서 이 다음부터는 $ 를 jindo 의 $ 로 사용할 수 있다.
+var el = $("test"); //el 은 jQuery Object 가 아닌 Jindo.$() 에 의해 수행된 element 값이다.
 </script>
 ```
 
@@ -26,19 +29,26 @@ j( "div p" ).hide();
 $ 를 사용하고 싶은 경우 다음과 같은 형태로 사용이 가능하다.
 ```js
 //jQuery ready 의 callback 함수 파라미터로 $ 를 받는다.
-$.noConflict();
+jQuery.noConflict();
 jQuery( document ).ready(function( $ ) {
   // Code that uses jQuery's $ can follow here.
+  $( "div" ).hide();
 });
 
-//즉시 실행함수에 jQuery 를 넘기고 $ 를 받는다.
+/** 혹은 **/
+
+//즉시 실행함수에 jQuery 를 넘기고 파라미터로 $ 를 받는다.
 jQuery.noConflict();
 (function( $ ) {
   $(function() {
     // More code using $ as alias to jQuery
+    $( "div" ).hide();
   });
 })(jQuery);
 ```
+
+#### 참고문서
+  * http://learn.jquery.com/using-jquery-core/avoid-conflicts-other-libraries/
 
 ## 자주하는 실수
 ### $Element("id") vs $("selector")
