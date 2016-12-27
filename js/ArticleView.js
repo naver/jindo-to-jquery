@@ -9,16 +9,16 @@ var ArticleView = (function() {
 	}
 
 	function _updateAPI(data) {
-		var testJsBinUrl = 'http://jsbin.com/heqova/embed?js&height=450px';
+		var testJsBinUrl = 'https://jsbin.com/heqova/embed?js&height=450px';
 		var $article = $('article');
 
 		var templateData = {
 			methodName: data.title,
 			description: data.description,
-			jindoJsbin: data.jindoCodeUrl ? "http://jsbin.com/"+data.jindoCodeUrl +'/embed?js&height=450px' : testJsBinUrl,
+			jindoJsbin: data.jindoCodeUrl ? "https://jsbin.com/"+data.jindoCodeUrl +'/embed?js&height=450px' : testJsBinUrl,
 			jindoApiUrl: _getJindoApiUrl(data),
 			jqueryApiUrl: _getJqueryApiUrl(data),
-			jqueryJsbin: data.jqueryCodeUrl ?  "http://jsbin.com/"+data.jqueryCodeUrl +'/embed?js&height=450px' : testJsBinUrl
+			jqueryJsbin: data.jqueryCodeUrl ?  "https://jsbin.com/"+data.jqueryCodeUrl +'/embed?js&height=450px' : testJsBinUrl
 		}
 
 		$article.addClass('api');
