@@ -36,7 +36,11 @@ var ArticleView = (function() {
 			method: 'get',
 			complete: function (jqXHR, textStatus) {
 				var data = jqXHR.responseText;
-				$("#jindoCode").text(data);
+				if (data.length > 0) {
+					$("#jindoCode").text(data);
+				} else {
+					$("#jindoCode").text("// TODO");
+				}
 				hljs.highlightBlock($("#jindoCode")[0])
 			}
 		});
@@ -45,7 +49,11 @@ var ArticleView = (function() {
 			method: 'get',
 			complete: function (jqXHR, textStatus) {
 				var data = jqXHR.responseText;
-				$("#jqueryCode").text(data);
+				if (data.length > 0) {
+					$("#jqueryCode").text(data);
+				} else {
+					$("#jqueryCode").text("// TODO");
+				}
 				hljs.highlightBlock($("#jqueryCode")[0])
 			}
 		});
