@@ -214,13 +214,6 @@ article > section.header p {
 	box-sizing: content-box;
 }
 	
-article > section.content {
-	/*text-align: center;*/
-	min-height: 450px;
-	/*height : 450px; /* 임시값 */
-	/*max-width: 912px;*/
-}
-
 article > section.content > .col {
 	width: 50%;
 	float: left;
@@ -236,11 +229,18 @@ article > section.content > h2> span {
  */
 article.api > section.content {
 	text-align: center;
-	min-height: 450px;
 }
 
 article.api h2 {
 	font-size: 1.5em;
+}
+article.api code {
+	font-size: 11px;
+	text-align: left;
+}
+article.api pre {
+	text-align: left;
+	margin: 0 8px;
 }
 
 

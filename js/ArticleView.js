@@ -1,6 +1,5 @@
 var ArticleView = (function() {
 	function updateArticle(articleInfo) {
-		console.log(articleInfo);
 		if ( articleInfo.type== 'api' ) {
 			_updateAPI( articleInfo.data );
 		} else if ( articleInfo.type === 'guide' ) {
@@ -9,16 +8,16 @@ var ArticleView = (function() {
 	}
 
 	function _updateAPI(data) {
-		var testJsBinUrl = 'http://jsbin.com/heqova/embed?js&height=450px';
+		var testJsBinUrl = 'http://jsbin.com/heqova/embed?js';
 		var $article = $('article');
-
+		
 		var templateData = {
 			methodName: data.title,
 			description: data.description,
-			jindoJsbin: data.jindoCodeUrl ? "http://jsbin.com/"+data.jindoCodeUrl +'/embed?js&height=450px' : testJsBinUrl,
+			jindoJsbin: data.jindoCodeUrl ? "http://jsbin.com/"+data.jindoCodeUrl +'/embed?html,js,console' : testJsBinUrl,
 			jindoApiUrl: _getJindoApiUrl(data),
 			jqueryApiUrl: _getJqueryApiUrl(data),
-			jqueryJsbin: data.jqueryCodeUrl ?  "http://jsbin.com/"+data.jqueryCodeUrl +'/embed?js&height=450px' : testJsBinUrl
+			jqueryJsbin: data.jqueryCodeUrl ?  "http://jsbin.com/"+data.jqueryCodeUrl +'/embed?html,js,console' : testJsBinUrl
 		}
 
 		$article.addClass('api');
@@ -31,6 +30,25 @@ var ArticleView = (function() {
 			
 		window.jsbinified = undefined;
 		$('article').html($article);
+
+
+		$.ajax("http://output.jsbin.com/"+data.jindoCodeUrl+".js", {
+			method: 'get',
+			complete: function (jqXHR, textStatus) {
+				var data = jqXHR.responseText;
+				$("#jindoCode").text(data);
+				hljs.highlightBlock($("#jindoCode")[0])
+			}
+		});
+
+		$.ajax("http://output.jsbin.com/"+data.jqueryCodeUrl+".js", {
+			method: 'get',
+			complete: function (jqXHR, textStatus) {
+				var data = jqXHR.responseText;
+				$("#jqueryCode").text(data);
+				hljs.highlightBlock($("#jqueryCode")[0])
+			}
+		});
 	}
 	
 	function _getJindoApiUrl(data){
@@ -38,7 +56,6 @@ var ArticleView = (function() {
 		if(data.className === 'jindo') {
 			className = '';
 		}
-		console.log(data.name);
 		var category = (data.name.indexOf('()') === -1) ? 'property' : 'method'; 		
 		return "http://jindo.dev.naver.com/docs/jindo/2.12.1/desktop/ko/classes/jindo"+className+".html#"+category+"_"+data.name.replace("()", '');
 	}
